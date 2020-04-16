@@ -1,0 +1,48 @@
+
+{
+  "extends": ["prettier", "prettier/react"],
+  "plugins": ["import", "react", "prettier"],
+  "settings": {
+    "import/extensions": [".js"]
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "import/order": ["error", {
+			"newlines-between": "always",
+			"groups": ["builtin", "external", "internal", ["parent", "sibling", "index"]]
+		}],
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "prefer-template": "error",
+    "prettier/prettier": "error",
+    "radix": "error",
+    "react/jsx-boolean-value": ["error", "never"],
+    "react/jsx-key": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-no-undef": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-wrap-multilines": "error",
+    "react/no-deprecated": "error",
+    "react/no-did-mount-set-state": "error",
+    "react/no-did-update-set-state": "error",
+    "react/no-string-refs": "error",
+    "react/no-unknown-property": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/self-closing-comp": "error",
+    "react/sort-prop-types": "error",
+		"react/jsx-fragments": ["error", "syntax"]
+  }
+}
