@@ -1,0 +1,160 @@
+/**
+ * @author oguhpereira
+ * General css
+ */
+
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+:root {
+	--white: #fff;
+	--green: #29CB97;
+	--green-dark: #163920;
+	--gray: #979797;
+	--blue-dark: #31394D;
+	--blue-light: #748AA1;
+	--red: #DE4244;
+}
+
+.container {
+	max-width: 1024px;
+}
+
+.box {
+	background-color: var(--white);
+	border-radius: 5px;
+	padding: 15px;
+}
+.box .title {
+	font-weight: 600;
+	color: var(--blue-dark);
+}
+
+.form-group {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.form-group .label {
+	color: var(--blue-dark);
+	font-weight: bold;
+	padding-bottom: 4px;
+}
+
+.form-group .form-control {
+	border: 1px solid var(--blue-light);
+	border-radius: 5px;
+	display: block;
+	font-size: 18px;
+	height: 40px;
+	max-width: 100%;
+	padding: 0 10px;
+	width: 100%;
+}
+
+.form-group .form-control:focus {
+	border-color: var(--blue-dark);
+	transition: .1s border;
+	outline: none;
+}
+
+.btn {
+	align-items: center;
+	background-color: var(--blue-dark);
+	border: none;
+	border-radius: 27px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	color: var(--white);
+	cursor: pointer;
+	font-size: 1em;
+	justify-content: center;
+	height: 55px;
+	min-width: 150px;
+	padding: 0 20px;
+	transition: all .4s;
+	-webkit-transition: all .4s;
+	-o-transition: all .4s;
+	-moz-transition: all .4s;
+}
+
+.btn:focus {
+	outline: none;
+}
+
+.btn-success {
+	background-color: var(--green-dark);
+}
+.btn-success:hover {
+	background-color: var(--green);
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col-6 {
+	padding: 15px;
+	width: 50%;
+}
+
+a {
+	color: var(--blue-dark);
+	display: inline-block;
+	outline: none;
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--blue-light);
+}
+
+.fr {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.error-small {
+	animation: fadeIn 0.5s;
+	color: var(--red);
+	font-size: .9em;
+	padding: 4px;
+}
+
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+.form-control.input-error {
+	border-color: var(--red);
+	transition: border 1s;
+}
