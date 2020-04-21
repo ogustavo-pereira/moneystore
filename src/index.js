@@ -9,6 +9,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import './index.css';
 import Login from './layout/Login';
+import Admin from './layout/Admin';
 import * as serviceWorker from './serviceWorker';
 
 const hist = createBrowserHistory();
@@ -16,6 +17,7 @@ const hist = createBrowserHistory();
 ReactDOM.render(
 	<Router history={hist}>
 		<Switch>
+			<Route path="/user" component={Admin} />
 			<Route path="/" component={Login} />
 			<Redirect from="/" to="/login" />
 		</Switch>

@@ -1,4 +1,9 @@
+/**
+ * @author oguhpereira
+ * Routes
+ */
 import LoginArea from './views/LoginArea';
+import Dashboard from './views/Dashboard';
 
 export default [
 	{
@@ -12,5 +17,11 @@ export default [
 		name: 'register-user',
 		component: LoginArea,
 		layout: '/register',
+	},
+	{
+		path: '/dashboard',
+		name: 'dashboard',
+		component: Dashboard,
+		layout: '/user',
 	},
 ];

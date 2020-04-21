@@ -1,0 +1,16 @@
+<?xml version="1.0" ?><svg height="23px" fill="#29CB97" version="1.1" viewBox="0 0 18 23" width="18px"
+    xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title />
+    <desc />
+    <defs />
+    <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1">
+        <g fill="#29CB97" id="Icons-Communication" transform="translate(-211.000000, -82.000000)">
+            <g id="live-help" transform="translate(211.000000, 82.500000)">
+                <path
+                    d="M16,0 L2,0 C0.9,0 0,0.9 0,2 L0,16 C0,17.1 0.9,18 2,18 L6,18 L9,21 L12,18 L16,18 C17.1,18 18,17.1 18,16 L18,2 C18,0.9 17.1,0 16,0 L16,0 Z M10,16 L8,16 L8,14 L10,14 L10,16 L10,16 Z M12.1,8.3 L11.2,9.2 C10.4,9.9 10,10.5 10,12 L8,12 L8,11.5 C8,10.4 8.4,9.4 9.2,8.7 L10.4,7.4 C10.8,7.1 11,6.6 11,6 C11,4.9 10.1,4 9,4 C7.9,4 7,4.9 7,6 L5,6 C5,3.8 6.8,2 9,2 C11.2,2 13,3.8 13,6 C13,6.9 12.6,7.7 12.1,8.3 L12.1,8.3 Z"
+                    id="Shape" />
+            </g>
+        </g>
+    </g>
+</svg>

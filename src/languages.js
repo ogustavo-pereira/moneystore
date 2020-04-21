@@ -10,6 +10,9 @@ const ptBR = {
 	unexpected_error: 'Ocorreu um erro inesperado',
 	user_not_found: 'Usuário não encontrado',
 	password_error: 'Senha invalida',
+	logo: 'Money Store',
+	help: 'Ajuda',
+	tradearea: 'Área de Troca',
 };
 
 const enUS = {
@@ -24,6 +27,10 @@ const enUS = {
 	unexpected_error: 'An unexpected error has occurred',
 	user_not_found: 'User not found',
 	password_error: 'Invalid Password',
+	logo: 'Money Store',
+	help: 'Help',
+	myaccount: 'My Account',
+	tradearea: 'Trade Area',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;
