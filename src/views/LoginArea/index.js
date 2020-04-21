@@ -1,3 +1,7 @@
+/**
+ * @author oguhpereira
+ * Login and Register Page
+ */
 import React from 'react';
 
 import RegisterForm from '../../components/RegisterForm';

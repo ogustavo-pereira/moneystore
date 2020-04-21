@@ -1,3 +1,7 @@
+/**
+ * @author oguhpereira
+ * User register form
+ */
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 

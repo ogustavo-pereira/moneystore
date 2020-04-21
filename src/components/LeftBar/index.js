@@ -1,10 +1,14 @@
+/**
+ * @author oguhpereira
+ * Left Bar Component
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './leftbar.css';
 import Logo from '../../logo.svg';
 import Help from '../../assets/help.svg';
-import Stats from '../../assets/shopping.svg';
+import Stats from '../../assets/stats.svg';
 import StatsActive from '../../assets/stats-active.svg';
 import Shopping from '../../assets/shopping.svg';
 import ShoppingActive from '../../assets/shopping-active.svg';
@@ -30,7 +34,7 @@ export default function LeftBar(props) {
 						dashboadIcon ? 'navigation-item active' : 'navigation-item'
 					}
 				>
-					<Link to="/dashboard">
+					<Link to="/user/dashboard">
 						<img
 							className="icon-md"
 							src={dashboadIcon ? StatsActive : Stats}
@@ -44,7 +48,7 @@ export default function LeftBar(props) {
 						shoppingIcon ? 'navigation-item active' : 'navigation-item'
 					}
 				>
-					<Link to="/trade">
+					<Link to="/user/trade">
 						<img
 							className="icon-md"
 							src={shoppingIcon ? ShoppingActive : Shopping}

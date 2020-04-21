@@ -4,6 +4,7 @@
  */
 import LoginArea from './views/LoginArea';
 import Dashboard from './views/Dashboard';
+import Trade from './views/Trade';
 
 export default [
 	{
@@ -22,6 +23,12 @@ export default [
 		path: '/dashboard',
 		name: 'dashboard',
 		component: Dashboard,
+		layout: '/user',
+	},
+	{
+		path: '/trade',
+		name: 'dashboard',
+		component: Trade,
 		layout: '/user',
 	},
 ];

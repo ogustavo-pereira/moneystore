@@ -26,6 +26,7 @@
 	list-style-type: none;
 }
 .navigation-item {
+	border-color: var(--green);
 	display: inline-block;
 	font-weight: 600;
 	padding: 25px;
@@ -48,8 +49,8 @@
 
 .navigation-item.active:hover {
 	background-color: var(--green);
-	border-right: 5px solid var(--green);
-	transition: all 0.3s;
+	border-right: 7px solid var(--green);
+	transition: border-right 0.1s;
 }
 
 .help {
