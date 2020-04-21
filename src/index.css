@@ -164,20 +164,34 @@ a:hover {
 }
 
 .main-content {
-	width: 50%;
+	margin-left: 80px;
+	margin-right: 300px;
+	width: 100%;
 }
 
 .left-content {
-    background: white;
-    height: 100%;
-	position: fixed;
-	width: 80px;
+	background: white;
 	-webkit-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
 	-moz-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
 	box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
+    height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 80px;
+	z-index: 99;
 }
+
 .right-content {
-	width: 25%;
+	background: white;
+	-webkit-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
+	-moz-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
+	box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
+    height: 100%;
+	right: 0;
+	position: fixed;
+	top: 0;
+	width: 300px;
 }
 
 .icon-md {
@@ -185,3 +199,10 @@ a:hover {
 	display: inline-block;
 }
 
+.text-center {
+	text-align: center;
+}
+
+.hidden {
+	display: none;
+}

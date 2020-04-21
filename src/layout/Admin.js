@@ -7,6 +7,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import routes from '../routes.js';
 import LeftBar from '../components/LeftBar/index.js';
+import RightBar from '../components/RightBar/index.js';
 
 const switchRoutes = (
 	<Switch>
@@ -33,7 +34,9 @@ export default function Admin() {
 				<LeftBar />
 			</div>
 			<div className="main-content">{switchRoutes}</div>
-			<div className="right-content">Test</div>
+			<div className="right-content">
+				<RightBar />
+			</div>
 		</div>
 	);
 }

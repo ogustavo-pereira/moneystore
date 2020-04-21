@@ -6,33 +6,33 @@
 	height: 100%;
 }
 
-.logo {
+.leftbar .logo {
 	margin-top: 15px;
 	text-align: center;
 }
 
-.logo .icon-md {
-	width: 80px;
+.leftbar .logo .icon-md {
+	width: 60px;
 }
-.logo .icon-md:hover {
+.leftbar .logo .icon-md:hover {
 	transform: rotate(20deg);
 	transition: 0.2s;
 }
 
-.navigation {
+.leftbar .navigation {
 	margin: 0px;
 	min-height: 250px;
 	padding: 0px;
 	list-style-type: none;
 }
-.navigation-item {
+.leftbar .navigation-item {
 	border-color: var(--green);
 	display: inline-block;
 	font-weight: 600;
 	padding: 25px;
 }
 
-.navigation-item.active {
+.leftbar .navigation-item.active {
 	background-color: var(--green);
 	border-right: 9px solid var(--green);
 	border-top-right-radius: 10px;
@@ -42,24 +42,24 @@
 	box-shadow: 0px 3px 30px -12px rgba(0,0,0,0.37);
 }
 
-.navigation-item:hover {
+.leftbar .navigation-item:hover {
 	background-color: #f0f1f2;
 	transition: all 0.1s;
 }
 
-.navigation-item.active:hover {
+.leftbar .navigation-item.active:hover {
 	background-color: var(--green);
 	border-right: 7px solid var(--green);
 	transition: border-right 0.1s;
 }
 
-.help {
+.leftbar .help {
 	cursor: pointer;
 	margin-bottom: 10px;
 	text-align: center;
 }
 
-.help:hover {
+.leftbar .help:hover {
 	transform: translate(0px, -7px);
 	transition: transform 0.2s;
 }

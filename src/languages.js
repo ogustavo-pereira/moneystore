@@ -13,6 +13,11 @@ const ptBR = {
 	logo: 'Money Store',
 	help: 'Ajuda',
 	tradearea: 'Área de Troca',
+	view_more: 'Exibir Mais',
+	your_wallet: 'Sua Carteira',
+	money_avaible: 'Dinheiro Disponível',
+	total_invested: 'Total Investido',
+	latest_operations: 'Últimas operações',
 };
 
 const enUS = {
@@ -31,6 +36,11 @@ const enUS = {
 	help: 'Help',
 	myaccount: 'My Account',
 	tradearea: 'Trade Area',
+	view_more: 'View More',
+	your_wallet: 'Your Wallet',
+	money_avaible: 'Money Avaible',
+	total_invested: 'Total Invested',
+	latest_operations: 'Latest operations',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;
