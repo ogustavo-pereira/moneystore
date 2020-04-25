@@ -5,8 +5,11 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import lang from '../../languages';
+import * as AuthActions from '../../store/actions/auth';
 import { errorSpan } from '../../utils';
 
 /**
@@ -31,8 +34,26 @@ function login(userWantLogin) {
 	) {
 		throw lang.password_error;
 	}
+	const userAuth = btoa(userFound + userWantLogin.email);
+	const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
+	localStorage.setItem('auth', btoa(userFound + userWantLogin.email));
 
-	return true;
+	if (!(userAuth in dataUser)) {
+		dataUser[userAuth] = btoa(
+			JSON.stringify({
+				money: 100000,
+				totalInvested: 0,
+				operations: [],
+				coins: [
+					{ name: 'BitCoin', value: 0 },
+					{ name: 'Brita', value: 0 },
+				],
+			})
+		);
+		localStorage.setItem('data', JSON.stringify(dataUser));
+	}
+
+	return btoa(userFound + userWantLogin.email);
 }
 
 class LoginForm extends React.Component {
@@ -54,12 +75,14 @@ class LoginForm extends React.Component {
 		try {
 			if (this.errorValidationForm(target)) return;
 
-			const response = login({
+			const token = login({
 				email: target.email.value,
 				password: target.password.value,
 			});
-			if (response) {
-				console.log('LOGGED');
+
+			if (token) {
+				this.props.login(token);
+				console.log(this.props.auth);
 			}
 		} catch (e) {
 			if (e === lang.user_not_found) {
@@ -156,4 +179,11 @@ class LoginForm extends React.Component {
 	}
 }
 
-export default LoginForm;
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+});
+
+const mapDispatchToProps = (dispatch) =>
+	bindActionCreators(AuthActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

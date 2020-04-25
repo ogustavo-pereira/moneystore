@@ -6,12 +6,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './leftbar.css';
-import Logo from '../../logo.svg';
-import Help from '../../assets/help.svg';
-import Stats from '../../assets/stats.svg';
-import StatsActive from '../../assets/stats-active.svg';
-import Shopping from '../../assets/shopping.svg';
-import ShoppingActive from '../../assets/shopping-active.svg';
+import Logo from '../../images/logo.svg';
+import Help from '../../images/help.svg';
+import Stats from '../../images/stats.svg';
+import StatsActive from '../../images/stats-active.svg';
+import Shopping from '../../images/shopping.svg';
+import ShoppingActive from '../../images/shopping-active.svg';
 import languages from '../../languages';
 
 export default function LeftBar(props) {
@@ -34,7 +34,7 @@ export default function LeftBar(props) {
 						dashboadIcon ? 'navigation-item active' : 'navigation-item'
 					}
 				>
-					<Link to="/user/dashboard">
+					<Link to="/dashboard">
 						<img
 							className="icon-md"
 							src={dashboadIcon ? StatsActive : Stats}
@@ -48,7 +48,7 @@ export default function LeftBar(props) {
 						shoppingIcon ? 'navigation-item active' : 'navigation-item'
 					}
 				>
-					<Link to="/user/trade">
+					<Link to="/trade">
 						<img
 							className="icon-md"
 							src={shoppingIcon ? ShoppingActive : Shopping}

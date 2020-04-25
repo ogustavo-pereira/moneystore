@@ -139,39 +139,43 @@ class RegisterForm extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<h1 className="title">{lang.register}</h1>
-				<form
-					onSubmit={this.handleSubmit}
-					autoComplete="off"
-					method="post"
-					action=""
-				>
-					<div ref={this.userNameGroup} className="form-group">
-						<label className="label" htmlFor="username">
-							{lang.username}
-						</label>
-						<input className="form-control" type="text" id="username" />
+			<div className="container-center">
+				<div className="box wrap-box-center">
+					<div>
+						<h1 className="title">{lang.register}</h1>
+						<form
+							onSubmit={this.handleSubmit}
+							autoComplete="off"
+							method="post"
+							action=""
+						>
+							<div ref={this.userNameGroup} className="form-group">
+								<label className="label" htmlFor="username">
+									{lang.username}
+								</label>
+								<input className="form-control" type="text" id="username" />
+							</div>
+							<div ref={this.emailGroup} className="form-group">
+								<label className="label" htmlFor="email">
+									{lang.email}
+								</label>
+								<input className="form-control" type="email" id="email" />
+							</div>
+							<div ref={this.passwordGroup} className="form-group">
+								<label className="label" htmlFor="password">
+									{lang.password}
+								</label>
+								<input className="form-control" type="password" id="password" />
+							</div>
+							<Link to="/login" className="mb-20 fr">
+								{lang.login}
+							</Link>
+							<button className="btn btn-success mt-10 clear">
+								{lang.register}
+							</button>
+						</form>
 					</div>
-					<div ref={this.emailGroup} className="form-group">
-						<label className="label" htmlFor="email">
-							{lang.email}
-						</label>
-						<input className="form-control" type="email" id="email" />
-					</div>
-					<div ref={this.passwordGroup} className="form-group">
-						<label className="label" htmlFor="password">
-							{lang.password}
-						</label>
-						<input className="form-control" type="password" id="password" />
-					</div>
-					<Link to="/login" className="mb-20 fr">
-						{lang.login}
-					</Link>
-					<button className="btn btn-success mt-10 clear">
-						{lang.register}
-					</button>
-				</form>
+				</div>
 			</div>
 		);
 	}

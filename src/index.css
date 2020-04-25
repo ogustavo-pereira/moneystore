@@ -158,7 +158,7 @@ a:hover {
 	border-color: var(--red);
 	transition: border 1s;
 }
-.app-content {
+.app-container {
 	display: inline-flex;
 	width: 100%;
 }
@@ -205,4 +205,20 @@ a:hover {
 
 .hidden {
 	display: none;
+}
+
+.container-center {
+	align-items: center;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 100vh;
+	width: 100%;
+}
+
+.wrap-box-center{
+	padding: 45px;
+    position: relative;
+	width: 560px;
 }

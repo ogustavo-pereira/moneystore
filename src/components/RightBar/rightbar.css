@@ -55,25 +55,25 @@
 	font-weight: 600;
 }
 
-.rightbar .coins {
+.rightbar .my-coins .coin {
 	align-items: center;
 	display: inline-flex;
 	margin-bottom: 15px;
 }
 
-.rightbar .coins .coin-icon {
+.rightbar .my-coins .coin .coin-icon {
 	margin-right: 15px;
 }
 
-.rightbar .coins .name,.rightbar .coins .value {
+.rightbar .my-coins .coin .name,.rightbar .coin .value {
 	display: block;
 }
 
-.rightbar .coins .value  {
+.rightbar .my-coins .coin .value  {
 	color: var(--blue-dark);
 }
 
-.rightbar .coins .name {
+.rightbar .my-coins .coin .name {
 	color: var(--blue-light);
 }
 

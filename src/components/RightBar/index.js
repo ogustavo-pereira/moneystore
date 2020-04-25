@@ -1,17 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './rightbar.css';
+import { formatMoney } from '../../utils';
 import languages from '../../languages';
-import BitcoinIcon from '../../assets/bitcoingreenbg.svg';
-import BritaIcon from '../../assets/britagreenbg.svg';
+import BitcoinIcon from '../../images/bitcoingreenbg.svg';
+import BritaIcon from '../../images/britagreenbg.svg';
 
 const DinamicArea = ({ title, children }) => {
-	const [viewShow, setShow] = React.useState(false);
+	const [viewShow, setShow] = React.useState(true);
 	const handleShow = () => setShow(!viewShow);
 	return (
 		<div>
 			<div className="header">
-				<h3 className="title">{languages.your_wallet}</h3>
+				<h3 className="title">{title}</h3>
 				<span
 					onClick={handleShow}
 					className={viewShow ? 'view-more active' : 'view-more'}
@@ -24,38 +26,38 @@ const DinamicArea = ({ title, children }) => {
 	);
 };
 
-const MyCoins = () => {
+const Coin = ({ value, label, src }) =>
+	value && label && src ? (
+		<div className="coin">
+			<img className="coin-icon" src={src} alt={label} title={label} />
+			<div>
+				<span className="value">{formatMoney(value)}</span>
+				<span className="name">{label}</span>
+			</div>
+		</div>
+	) : null;
+
+const Coins = () => {
 	return (
 		<div className="my-coins">
-			<DinamicArea title={languages.your_wallet}>
-				<div className="coins">
-					<img
-						className="coin-icon"
-						src={BitcoinIcon}
-						alt="Bitcoins"
-						title="Biticoins"
-					/>
-					<div>
-						<span className="value">$ 500.999.00</span>
-						<span className="name">Bitcoins</span>
-					</div>
-				</div>
-				<div className="coins">
-					<img
-						className="coin-icon"
-						src={BritaIcon}
-						alt="Brita"
-						title="Brita"
-					/>
-					<div>
-						<span className="values">$ 30.999.00</span>
-						<span className="name">Brita</span>
-					</div>
-				</div>
+			<DinamicArea title={languages.your_coins}>
+				<Coin value="20000000" label="Biticoins" src={BitcoinIcon} />
+				<Coin value="3000000" label="Brita" src={BritaIcon} />
 			</DinamicArea>
 		</div>
 	);
 };
+
+const OperationItem = ({ coin, value, date }) =>
+	coin && value && date ? (
+		<li className="operation-item">
+			<div className="operation-detail">
+				<span className="coin">{coin}</span>
+				<span className="value">{formatMoney(value)}</span>
+			</div>
+			<span className="date">{date}</span>
+		</li>
+	) : null;
 
 const LatestOperation = () => {
 	return (
@@ -63,39 +65,10 @@ const LatestOperation = () => {
 			<DinamicArea title={languages.latest_operations}>
 				<div className="operations">
 					<ul className="operations-list">
-						<li className="operation-item">
-							<div className="operation-detail">
-								<span className="coin">Bitcoin</span>
-								<span className="value">R$ 400.000,00</span>
-							</div>
-							<span className="date">03/04/2020</span>
-						</li>
-						<li className="operation-item">
-							<div className="operation-detail">
-								<span className="coin">Bitcoin</span>
-								<span className="value">R$ 400.000,00</span>
-							</div>
-							<span className="date">03/04/2020</span>
-						</li>
-						<li className="operation-item">
-							<div className="operation-detail">
-								<span className="coin">Bitcoin</span>
-								<span className="value">R$ 400.000,00</span>
-							</div>
-							<span className="date">03/04/2020</span>
-						</li>
-						<li className="operation-item">
-							<div className="operation-detail">
-								<span className="coin">Bitcoin</span>
-								<span className="value">R$ 400.000,00</span>
-							</div>
-							<span className="date">03/04/2020</span>
-						</li>
+						<OperationItem coin="Bitcoin" value="40000000" date="03/04/2020" />
 					</ul>
 					<div className="text-center mt-20">
-						<a className="link" href="/">
-							Ver strato completo
-						</a>
+						<Link to="/login">{languages.see_complete_extract}</Link>
 					</div>
 				</div>
 			</DinamicArea>
@@ -108,7 +81,7 @@ const BalanceItem = ({ label, value }) => {
 		return (
 			<div>
 				<span className="description-balance">{label}</span>
-				<span className="money-balance">{value}</span>
+				<span className="money-balance">{formatMoney(value)}</span>
 			</div>
 		);
 	}
@@ -119,22 +92,19 @@ const Balance = (props) => {
 	return (
 		<div className="balance">
 			<DinamicArea title={languages.your_wallet}>
-				<BalanceItem label={languages.money_avaible} value="R$ 13.000.000,00" />
+				<BalanceItem label={languages.money_avaible} value="1300000.323204" />
 				<br />
-				<BalanceItem
-					label={languages.total_invested}
-					value="R$ 13.000.000,00"
-				/>
+				<BalanceItem label={languages.total_invested} value="1300000000" />
 			</DinamicArea>
 		</div>
 	);
 };
 
-export default function RightBar() {
+export default function RightBar(props) {
 	return (
 		<div className="rightbar">
 			<Balance />
-			<MyCoins />
+			<Coins />
 			<LatestOperation />
 		</div>
 	);

@@ -16,8 +16,10 @@ const ptBR = {
 	view_more: 'Exibir Mais',
 	your_wallet: 'Sua Carteira',
 	money_avaible: 'Dinheiro Disponível',
+	your_coins: 'Suas Moedas',
 	total_invested: 'Total Investido',
 	latest_operations: 'Últimas operações',
+	see_complete_extract: 'Ver Extrato Completo',
 };
 
 const enUS = {
@@ -39,8 +41,11 @@ const enUS = {
 	view_more: 'View More',
 	your_wallet: 'Your Wallet',
 	money_avaible: 'Money Avaible',
+	your_coins: 'Your Coins',
 	total_invested: 'Total Invested',
 	latest_operations: 'Latest operations',
+	see_complete_extract: 'See Complete Extract',
+
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;

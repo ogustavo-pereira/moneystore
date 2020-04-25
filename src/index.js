@@ -4,25 +4,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createBrowserHistory } from 'history';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import './index.css';
-import Login from './layout/Login';
-import Admin from './layout/Admin';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
-const hist = createBrowserHistory();
-
-ReactDOM.render(
-	<Router history={hist}>
-		<Switch>
-			<Route path="/user" component={Admin} />
-			<Route path="/" component={Login} />
-			<Redirect from="/" to="/login" />
-		</Switch>
-	</Router>,
-	document.getElementById('app')
-);
+ReactDOM.render(<App />, document.getElementById('app'));
 
 serviceWorker.unregister();
