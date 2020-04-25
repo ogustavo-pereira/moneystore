@@ -21,6 +21,7 @@ code {
 	--green: #29CB97;
 	--green-dark: #163920;
 	--gray: #979797;
+	--gray-light: #F2F2F2;
 	--blue-dark: #31394D;
 	--blue-light: #748AA1;
 	--red: #DE4244;
@@ -164,9 +165,27 @@ a:hover {
 }
 
 .main-content {
+	background: #F5F6FA;
+	box-sizing: border-box;
+	padding: 40px;
 	margin-left: 80px;
 	margin-right: 300px;
+	min-height: 100vh;
 	width: 100%;
+}
+
+.main-content .title {
+	color: var(--blue-dark);
+	font-size: 2em;
+	font-weight: 400;
+	margin-bottom: 15px;
+}
+
+.main-content .subtitle {
+	color: var(--green);
+	font-size: 1.2em;
+	font-weight: 600;
+	margin-bottom: 10px;
 }
 
 .left-content {
@@ -222,3 +241,4 @@ a:hover {
     position: relative;
 	width: 560px;
 }
+

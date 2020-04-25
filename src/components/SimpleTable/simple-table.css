@@ -1,0 +1,30 @@
+.table-content {
+	margin-top: 35px;
+}
+
+.simple-table {
+    border-collapse: collapse;
+	text-align: center;
+	width: 100%;
+}
+
+.simple-table .thead {
+	background-color: var(--gray-light);
+	margin-bottom: 10px;
+}
+
+.simple-table .tbody {
+	background-color: white;
+}
+
+
+.simple-table .th {
+	color: #979797;
+	padding: 15px;
+	font-weight: 400;
+}
+
+.simple-table .td {
+	padding: 15px;
+}
+
