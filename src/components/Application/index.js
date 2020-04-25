@@ -1,6 +1,6 @@
 /**
  * @author oguhpereira
- * User register form
+ * Aplication
  */
 import React from 'react';
 import {
@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import LeftBar from '../LeftBar';
 import RightBar from '../RightBar';
 import { PrivateRoutes, PublicRoutes } from '../../routes';
+import { initWallet as initWalletAction } from '../../store/actions/wallet';
 
 const hist = createBrowserHistory();
 
@@ -35,16 +36,6 @@ function Container({ children, isPublic }) {
 		</div>
 	);
 }
-
-const user = {
-	isAuthenticated: false,
-	authenticate(cb) {
-		user.isAuthenticated = true;
-	},
-	signout(cb) {
-		user.isAuthenticated = false;
-	},
-};
 
 function PrivateRoute(props) {
 	const { auth } = props;
@@ -69,7 +60,8 @@ function PrivateRoute(props) {
 	);
 }
 
-function Application({ auth }) {
+function Application({ auth, initWallet }) {
+	initWallet();
 	return (
 		<Router history={hist}>
 			<Switch>
@@ -103,4 +95,10 @@ const mapStateToProps = (state) => ({
 	auth: state.auth,
 });
 
-export default connect(mapStateToProps, null)(Application);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		initWallet: () => dispatch(initWalletAction()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Application);

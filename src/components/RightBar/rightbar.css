@@ -59,6 +59,7 @@
 	align-items: center;
 	display: inline-flex;
 	margin-bottom: 15px;
+	width: 100%;
 }
 
 .rightbar .my-coins .coin .coin-icon {

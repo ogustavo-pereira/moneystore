@@ -1,5 +1,10 @@
+/**
+ * @author oguhpereira
+ * Righht Bar Component
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect, useSelector } from 'react-redux';
 
 import './rightbar.css';
 import { formatMoney } from '../../utils';
@@ -7,6 +12,24 @@ import languages from '../../languages';
 import BitcoinIcon from '../../images/bitcoingreenbg.svg';
 import BritaIcon from '../../images/britagreenbg.svg';
 
+/**
+ * @function findIcon
+ * @param {String} name
+ * @returns {JSX}
+ */
+const findIcon = (name) => {
+	switch (name.toLowerCase()) {
+		case 'bitcoin':
+			return BitcoinIcon;
+		default:
+			return BritaIcon;
+	}
+};
+
+/**
+ * @function DinamicArea
+ * @returns {JSX}
+ */
 const DinamicArea = ({ title, children }) => {
 	const [viewShow, setShow] = React.useState(true);
 	const handleShow = () => setShow(!viewShow);
@@ -26,8 +49,15 @@ const DinamicArea = ({ title, children }) => {
 	);
 };
 
+/**
+ * @function Coin
+ * @param {Number} value
+ * @param {String} label
+ * @param {String} src
+ * @returns {JSX}
+ */
 const Coin = ({ value, label, src }) =>
-	value && label && src ? (
+	label && src ? (
 		<div className="coin">
 			<img className="coin-icon" src={src} alt={label} title={label} />
 			<div>
@@ -37,17 +67,30 @@ const Coin = ({ value, label, src }) =>
 		</div>
 	) : null;
 
+/**
+ * @function Coins
+ * @returns {JSX}
+ */
 const Coins = () => {
+	const wallet = useSelector((state) => state.wallet);
 	return (
 		<div className="my-coins">
 			<DinamicArea title={languages.your_coins}>
-				<Coin value="20000000" label="Biticoins" src={BitcoinIcon} />
-				<Coin value="3000000" label="Brita" src={BritaIcon} />
+				{wallet.coins.map(({ value, name }, index) => (
+					<Coin key={index} value={value} label={name} src={findIcon(name)} />
+				))}
 			</DinamicArea>
 		</div>
 	);
 };
 
+/**
+ * @function OperationItem
+ * @param {String} coin
+ * @param {Number} value
+ * @param {Date} date
+ * @returns {JSX}
+ */
 const OperationItem = ({ coin, value, date }) =>
 	coin && value && date ? (
 		<li className="operation-item">
@@ -59,13 +102,25 @@ const OperationItem = ({ coin, value, date }) =>
 		</li>
 	) : null;
 
+/**
+ * @function LatestOperation
+ * @returns {JSX}
+ */
 const LatestOperation = () => {
+	const wallet = useSelector((state) => state.wallet);
 	return (
 		<div className="latest-operations">
 			<DinamicArea title={languages.latest_operations}>
 				<div className="operations">
 					<ul className="operations-list">
-						<OperationItem coin="Bitcoin" value="40000000" date="03/04/2020" />
+						{wallet.operations.map(({ value, name, date }, index) => (
+							<OperationItem
+								key={index}
+								coin={name}
+								value={value}
+								date={date}
+							/>
+						))}
 					</ul>
 					<div className="text-center mt-20">
 						<Link to="/login">{languages.see_complete_extract}</Link>
@@ -76,8 +131,14 @@ const LatestOperation = () => {
 	);
 };
 
+/**
+ * @function BalanceItem
+ * @param {String} label
+ * @param {Number} value
+ * @returns {JSX}
+ */
 const BalanceItem = ({ label, value }) => {
-	if (value && label) {
+	if (label) {
 		return (
 			<div>
 				<span className="description-balance">{label}</span>
@@ -85,22 +146,38 @@ const BalanceItem = ({ label, value }) => {
 			</div>
 		);
 	}
-	return;
+	return <div />;
 };
 
+/**
+ * @function BalanceItem
+ * @param {Object} props
+ * @returns {JSX}
+ */
 const Balance = (props) => {
+	const wallet = useSelector((state) => state.wallet);
 	return (
 		<div className="balance">
 			<DinamicArea title={languages.your_wallet}>
-				<BalanceItem label={languages.money_avaible} value="1300000.323204" />
+				<BalanceItem
+					label={languages.money_avaible}
+					value={wallet.money || 0}
+				/>
 				<br />
-				<BalanceItem label={languages.total_invested} value="1300000000" />
+				<BalanceItem
+					label={languages.total_invested}
+					value={wallet.totalInvested || 0}
+				/>
 			</DinamicArea>
 		</div>
 	);
 };
 
-export default function RightBar(props) {
+/**
+ * @function RightBar
+ * @returns {JSX}
+ */
+function RightBar() {
 	return (
 		<div className="rightbar">
 			<Balance />
@@ -109,3 +186,9 @@ export default function RightBar(props) {
 		</div>
 	);
 }
+
+const mapStateToProps = (state) => ({
+	wallet: state.wallet,
+});
+
+export default connect(mapStateToProps, null)(RightBar);

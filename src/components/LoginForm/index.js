@@ -69,7 +69,6 @@ function LoginForm(props) {
 		props.login(userAuth);
 	}
 
-	localStorage.setItem('auth', null);
 	const emailGroup = useRef(null);
 	const passwordGroup = useRef(null);
 
