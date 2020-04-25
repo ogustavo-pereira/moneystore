@@ -3,7 +3,7 @@
  * User login form
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,8 +14,8 @@ import { errorSpan } from '../../utils';
 
 /**
  * @function login
- * @param data json form
- * login user
+ * @param {Object} data json form
+ * @return {String} login auth
  */
 function login(userWantLogin) {
 	const emailWantLogin = btoa(userWantLogin.email);
@@ -36,7 +36,7 @@ function login(userWantLogin) {
 	}
 	const userAuth = btoa(userFound + userWantLogin.email);
 	const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
-	localStorage.setItem('auth', btoa(userFound + userWantLogin.email));
+	localStorage.setItem('auth', userAuth);
 
 	if (!(userAuth in dataUser)) {
 		dataUser[userAuth] = btoa(
@@ -56,24 +56,33 @@ function login(userWantLogin) {
 	return btoa(userFound + userWantLogin.email);
 }
 
-class LoginForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.emailGroup = React.createRef();
-		this.passwordGroup = React.createRef();
-		this.handleSubmit = this.handleSubmit.bind(this);
+/**
+ * @function LoginForm
+ * @return {JSX}
+ * render
+ */
+function LoginForm(props) {
+	const userAuth = localStorage.getItem('auth');
+	const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
+
+	if (userAuth in dataUser) {
+		props.login(userAuth);
 	}
+
+	localStorage.setItem('auth', null);
+	const emailGroup = useRef(null);
+	const passwordGroup = useRef(null);
 
 	/**
 	 * @function handleSubmit
-	 * @param  e element form
+	 * @param  {Event} e
 	 * Login User
 	 */
-	handleSubmit(e) {
+	function handleSubmit(e) {
 		e.preventDefault();
 		const target = e.target;
 		try {
-			if (this.errorValidationForm(target)) return;
+			if (errorValidationForm(target)) return;
 
 			const token = login({
 				email: target.email.value,
@@ -81,15 +90,14 @@ class LoginForm extends React.Component {
 			});
 
 			if (token) {
-				this.props.login(token);
-				console.log(this.props.auth);
+				props.login(token);
 			}
 		} catch (e) {
 			if (e === lang.user_not_found) {
-				this.emailGroup.current.append(errorSpan(lang.user_not_found));
+				emailGroup.current.append(errorSpan(lang.user_not_found));
 				target.email.className = 'form-control input-error';
 			} else if (e === lang.password_error) {
-				this.passwordGroup.current.append(errorSpan(lang.password_error));
+				passwordGroup.current.append(errorSpan(lang.password_error));
 				target.password.className = 'form-control input-error';
 			}
 		}
@@ -97,22 +105,22 @@ class LoginForm extends React.Component {
 
 	/**
 	 * @function errorValidationForm
-	 * @param target element form
-	 * @return boolean
+	 * @param {Element} target element form
+	 * @return {boolean}
 	 * Validation of form fields
 	 */
-	errorValidationForm(target) {
+	function errorValidationForm(target) {
 		let error = false;
-		this.clearError(target);
+		clearError(target);
 
 		if (!target.email.value) {
-			this.emailGroup.current.append(errorSpan(lang.fieldempty));
+			emailGroup.current.append(errorSpan(lang.fieldempty));
 			target.email.className = 'form-control input-error';
 			error = true;
 		}
 
 		if (!target.password.value) {
-			this.passwordGroup.current.append(errorSpan(lang.fieldempty));
+			passwordGroup.current.append(errorSpan(lang.fieldempty));
 			target.password.className = 'form-control input-error';
 			error = true;
 		}
@@ -122,16 +130,14 @@ class LoginForm extends React.Component {
 
 	/**
 	 * @function clearError
-	 * @param target element form
-	 * @return boolean
+	 * @param {Element} target element form
+	 * @return {boolean}
 	 * clears form errors
 	 */
-	clearError(target) {
+	function clearError(target) {
 		let clear = false;
-		const emailError = this.emailGroup.current.querySelector(
-			'span.error-small'
-		);
-		const passwordError = this.passwordGroup.current.querySelector(
+		const emailError = emailGroup.current.querySelector('span.error-small');
+		const passwordError = passwordGroup.current.querySelector(
 			'span.error-small'
 		);
 		if (emailError) {
@@ -147,36 +153,29 @@ class LoginForm extends React.Component {
 		return clear;
 	}
 
-	render() {
-		return (
-			<div>
-				<h1 className="title">{lang.login}</h1>
-				<form
-					onSubmit={this.handleSubmit}
-					autoComplete="off"
-					method="post"
-					action=""
-				>
-					<div ref={this.emailGroup} className="form-group">
-						<label className="label" htmlFor="email">
-							{lang.email}
-						</label>
-						<input className="form-control" type="text" id="email" />
-					</div>
-					<div ref={this.passwordGroup} className="form-group">
-						<label className="label" htmlFor="password">
-							{lang.password}
-						</label>
-						<input className="form-control" type="password" id="password" />
-					</div>
-					<Link to="/register" className="mb-20 fr">
-						{lang.register}
-					</Link>
-					<button className="btn btn-success mt-10 clear">{lang.next}</button>
-				</form>
-			</div>
-		);
-	}
+	return (
+		<div>
+			<h1 className="title">{lang.login}</h1>
+			<form onSubmit={handleSubmit} autoComplete="off" method="post" action="">
+				<div ref={emailGroup} className="form-group">
+					<label className="label" htmlFor="email">
+						{lang.email}
+					</label>
+					<input className="form-control" type="text" id="email" />
+				</div>
+				<div ref={passwordGroup} className="form-group">
+					<label className="label" htmlFor="password">
+						{lang.password}
+					</label>
+					<input className="form-control" type="password" id="password" />
+				</div>
+				<Link to="/register" className="mb-20 fr">
+					{lang.register}
+				</Link>
+				<button className="btn btn-success mt-10 clear">{lang.next}</button>
+			</form>
+		</div>
+	);
 }
 
 const mapStateToProps = (state) => ({

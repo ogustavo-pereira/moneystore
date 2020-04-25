@@ -3,15 +3,16 @@
  * User register form
  */
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import lang from '../../languages';
 import { errorSpan } from '../../utils';
 
 /**
  * @function save
- * @param data json form
+ * @param {Object} data json form
+ * @returns {Boolean}
  * Save element in localstorage
  */
 function save(data) {
@@ -31,26 +32,28 @@ function save(data) {
 	return true;
 }
 
-class RegisterForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.userNameGroup = React.createRef();
-		this.emailGroup = React.createRef();
-		this.passwordGroup = React.createRef();
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+/**
+ * @function RegisterForm
+ * @return {JSX}
+ * render
+ */
+function RegisterForm() {
+	let history = useHistory();
+	const userNameGroup = useRef(null);
+	const emailGroup = useRef(null);
+	const passwordGroup = useRef(null);
 
 	/**
 	 * @function handleSubmit
-	 * @param e element form
+	 * @param {Element} e element form
 	 * Save User
 	 */
-	handleSubmit(e) {
+	function handleSubmit(e) {
 		e.preventDefault();
 		const target = e.target;
 
 		try {
-			if (this.errorValidationForm(target)) return;
+			if (errorValidationForm(target)) return;
 
 			const data = {
 				username: target.username.value,
@@ -60,13 +63,11 @@ class RegisterForm extends React.Component {
 			//call apifunction
 			const response = save(data);
 			if (response) {
-				this.props.history.push('/login');
+				history.push('/login');
 			}
 		} catch (e) {
 			if (e === lang.email_already_registered) {
-				this.emailGroup.current.append(
-					errorSpan(lang.email_already_registered)
-				);
+				emailGroup.current.append(errorSpan(lang.email_already_registered));
 				target.email.className = 'form-control input-error';
 			}
 		}
@@ -74,27 +75,27 @@ class RegisterForm extends React.Component {
 
 	/**
 	 * @function errorValidationForm
-	 * @param target element form
-	 * @return boolean
+	 * @param {Element} target element form
+	 * @return {Boolean}
 	 * Validation of form fields
 	 */
-	errorValidationForm(target) {
+	function errorValidationForm(target) {
 		let error = false;
-		this.clearError(target);
+		clearError(target);
 		if (!target.username.value) {
-			this.userNameGroup.current.append(errorSpan(lang.fieldempty));
+			userNameGroup.current.append(errorSpan(lang.fieldempty));
 			target.username.className = 'form-control input-error';
 			error = true;
 		}
 
 		if (!target.email.value) {
-			this.emailGroup.current.append(errorSpan(lang.fieldempty));
+			emailGroup.current.append(errorSpan(lang.fieldempty));
 			target.email.className = 'form-control input-error';
 			error = true;
 		}
 
 		if (!target.password.value) {
-			this.passwordGroup.current.append(errorSpan(lang.fieldempty));
+			passwordGroup.current.append(errorSpan(lang.fieldempty));
 			target.password.className = 'form-control input-error';
 			error = true;
 		}
@@ -104,19 +105,17 @@ class RegisterForm extends React.Component {
 
 	/**
 	 * @function clearError
-	 * @param target element form
-	 * @return boolean
+	 * @param {Element} target element form
+	 * @return {Boolean}
 	 * clears form errors
 	 */
-	clearError(target) {
+	function clearError(target) {
 		let clear = false;
-		const userNameError = this.userNameGroup.current.querySelector(
+		const userNameError = userNameGroup.current.querySelector(
 			'span.error-small'
 		);
-		const emailError = this.emailGroup.current.querySelector(
-			'span.error-small'
-		);
-		const passwordError = this.passwordGroup.current.querySelector(
+		const emailError = emailGroup.current.querySelector('span.error-small');
+		const passwordError = passwordGroup.current.querySelector(
 			'span.error-small'
 		);
 		if (userNameError) {
@@ -137,48 +136,35 @@ class RegisterForm extends React.Component {
 		return clear;
 	}
 
-	render() {
-		return (
-			<div className="container-center">
-				<div className="box wrap-box-center">
-					<div>
-						<h1 className="title">{lang.register}</h1>
-						<form
-							onSubmit={this.handleSubmit}
-							autoComplete="off"
-							method="post"
-							action=""
-						>
-							<div ref={this.userNameGroup} className="form-group">
-								<label className="label" htmlFor="username">
-									{lang.username}
-								</label>
-								<input className="form-control" type="text" id="username" />
-							</div>
-							<div ref={this.emailGroup} className="form-group">
-								<label className="label" htmlFor="email">
-									{lang.email}
-								</label>
-								<input className="form-control" type="email" id="email" />
-							</div>
-							<div ref={this.passwordGroup} className="form-group">
-								<label className="label" htmlFor="password">
-									{lang.password}
-								</label>
-								<input className="form-control" type="password" id="password" />
-							</div>
-							<Link to="/login" className="mb-20 fr">
-								{lang.login}
-							</Link>
-							<button className="btn btn-success mt-10 clear">
-								{lang.register}
-							</button>
-						</form>
-					</div>
+	return (
+		<div>
+			<h1 className="title">{lang.register}</h1>
+			<form onSubmit={handleSubmit} autoComplete="off" method="post" action="">
+				<div ref={userNameGroup} className="form-group">
+					<label className="label" htmlFor="username">
+						{lang.username}
+					</label>
+					<input className="form-control" type="text" id="username" />
 				</div>
-			</div>
-		);
-	}
+				<div ref={emailGroup} className="form-group">
+					<label className="label" htmlFor="email">
+						{lang.email}
+					</label>
+					<input className="form-control" type="email" id="email" />
+				</div>
+				<div ref={passwordGroup} className="form-group">
+					<label className="label" htmlFor="password">
+						{lang.password}
+					</label>
+					<input className="form-control" type="password" id="password" />
+				</div>
+				<Link to="/login" className="mb-20 fr">
+					{lang.login}
+				</Link>
+				<button className="btn btn-success mt-10 clear">{lang.register}</button>
+			</form>
+		</div>
+	);
 }
 
 export default RegisterForm;
