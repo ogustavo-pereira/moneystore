@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import LeftBar from '../LeftBar';
 import RightBar from '../RightBar';
 import { PrivateRoutes, PublicRoutes } from '../../routes';
-import { initWallet as initWalletAction } from '../../store/actions/wallet';
+import { setWallet as setWalletAction } from '../../store/actions/wallet';
 import * as ApplicationAPI from './AplicationAPI';
 import { setBitcoin, setBrita } from '../../store/actions/price';
 
@@ -76,21 +76,21 @@ function PrivateRoute(props) {
 /**
  * @function Application
  * @param {Object} auth
- * @param {Function} initWallet
+ * @param {Function} setWallet
  * @param {Function} setBitcoin
  * @param {Function} setBrita
  * @returns {JSX}
  */
-function Application({ auth, initWallet, setBitcoin, setBrita }) {
+function Application({ auth, setWallet, setBitcoin, setBrita }) {
 	useEffect(() => {
 		async function watchBitcoin() {
-			setBitcoin(await ApplicationAPI.getBitCoinPrice());
+			setBitcoin(parseFloat(await ApplicationAPI.getBitCoinPrice()));
 		}
 		async function watchBrita() {
 			setBrita(await ApplicationAPI.getBritaPrice(new Date()));
 		}
 		async function getWallet() {
-			initWallet(ApplicationAPI.getWallet());
+			setWallet(ApplicationAPI.getWallet());
 		}
 		if (auth.isAuthenticated) {
 			getWallet();
@@ -134,7 +134,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		initWallet: (state) => dispatch(initWalletAction(state)),
+		setWallet: (state) => dispatch(setWalletAction(state)),
 		setBitcoin: (state) => dispatch(setBitcoin(state)),
 		setBrita: (state) => dispatch(setBrita(state)),
 	};

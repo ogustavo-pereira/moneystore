@@ -1,6 +1,6 @@
 import * as types from './actionsTypes';
 
-export const initWallet = (wallet) => ({
+export const setWallet = (wallet) => ({
 	type: types.INIT_WALLET,
 	payload: wallet,
 });
