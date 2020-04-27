@@ -20,6 +20,23 @@ const ptBR = {
 	total_invested: 'Total Investido',
 	latest_operations: 'Últimas operações',
 	see_complete_extract: 'Ver Extrato Completo',
+	buy: 'Comprar',
+	sell: 'Vender',
+	value_in_reais: 'Valor em Reais',
+	title: 'Título',
+	total: 'Total',
+	unit: 'Unidades',
+	select_quantity_you_want_buy: 'Selecione a quantidade que deseja comprar',
+	how_much_you_want_buy: 'Quanto deseja comprars?',
+	coin: 'Moeda',
+	atention_buy:
+		'Atenção, ao clicar em comprar você esta confirmando a compra desta quantia em moedas',
+	field_require_number: 'Você deve informar um número maior que 0',
+	price: 'Preço',
+	invalid_money: 'Você não tem este dinheiro para a compra',
+	invalid_quote: 'Sua moeda recebeu outra cotação',
+	invalid_quantity_very_short:
+		'Para finalizar a operação é necessario que o total seja maior que R$ 1,00',
 };
 
 const enUS = {
@@ -45,7 +62,23 @@ const enUS = {
 	total_invested: 'Total Invested',
 	latest_operations: 'Latest operations',
 	see_complete_extract: 'See Complete Extract',
-
+	buy: 'Buy',
+	sell: 'Sell',
+	value_in_reais: 'Value in Reais',
+	title: 'Title',
+	total: 'Total',
+	unit: 'Unit',
+	select_quantity_you_want_buy: 'Select the quantity you want to buy',
+	how_much_you_want_buy: 'How much do you want to buy?',
+	coin: 'Coin',
+	atention_buy:
+		'Attention, by clicking on buy you are confirming the purchase of this amount in coins',
+	field_require_number: 'You must enter a number greater than 0',
+	price: 'Price',
+	invalid_money: 'You do not have that money to buy',
+	invalid_quote: 'Your currency received another quote',
+	invalid_quantity_very_short:
+		'To complete the operation, the total must be greater than R$ 1,00',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;
