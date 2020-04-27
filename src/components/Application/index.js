@@ -2,7 +2,7 @@
  * @author oguhpereira
  * Aplication
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -16,9 +16,17 @@ import LeftBar from '../LeftBar';
 import RightBar from '../RightBar';
 import { PrivateRoutes, PublicRoutes } from '../../routes';
 import { initWallet as initWalletAction } from '../../store/actions/wallet';
+import * as ApplicationAPI from './AplicationAPI';
+import { setBitcoin, setBrita } from '../../store/actions/price';
 
 const hist = createBrowserHistory();
 
+/**
+ * @function Container
+ * @param {JSX} children
+ * @param {Boolean} isPublic
+ * @returns {JSX}
+ */
 function Container({ children, isPublic }) {
 	return isPublic ? (
 		<div className="container-center">
@@ -37,6 +45,11 @@ function Container({ children, isPublic }) {
 	);
 }
 
+/**
+ * @function PrivateRoute
+ * @param {Object} props from application
+ * @returns {JSX}
+ */
 function PrivateRoute(props) {
 	const { auth } = props;
 	return (
@@ -60,8 +73,32 @@ function PrivateRoute(props) {
 	);
 }
 
-function Application({ auth, initWallet }) {
-	initWallet();
+/**
+ * @function Application
+ * @param {Object} auth
+ * @param {Function} initWallet
+ * @param {Function} setBitcoin
+ * @param {Function} setBrita
+ * @returns {JSX}
+ */
+function Application({ auth, initWallet, setBitcoin, setBrita }) {
+	useEffect(() => {
+		async function watchBitcoin() {
+			setBitcoin(await ApplicationAPI.getBitCoinPrice());
+		}
+		async function watchBrita() {
+			setBrita(await ApplicationAPI.getBritaPrice(new Date()));
+		}
+		async function getWallet() {
+			initWallet(ApplicationAPI.getWallet());
+		}
+		if (auth.isAuthenticated) {
+			getWallet();
+			setInterval(watchBitcoin(), 30000);
+			setInterval(watchBrita(), 3600000);
+		}
+	});
+
 	return (
 		<Router history={hist}>
 			<Switch>
@@ -97,7 +134,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		initWallet: () => dispatch(initWalletAction()),
+		initWallet: (state) => dispatch(initWalletAction(state)),
+		setBitcoin: (state) => dispatch(setBitcoin(state)),
+		setBrita: (state) => dispatch(setBrita(state)),
 	};
 };
 

@@ -13,12 +13,9 @@ const initProps = {
 export default function wallet(state = initProps, action) {
 	switch (action.type) {
 		case types.INIT_WALLET:
-			const userAuth = localStorage.getItem('auth');
-			const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
-			const wallet = JSON.parse(atob(dataUser[userAuth]));
 			return {
 				...state,
-				...wallet,
+				...action.payload,
 			};
 		default:
 			return state;
