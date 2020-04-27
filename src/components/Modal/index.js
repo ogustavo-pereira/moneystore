@@ -2,7 +2,7 @@
  * @author oguhpereira
  * Modal Component
  */
-import React, { useState } from 'react';
+import React from 'react';
 
 import './modal.css';
 
@@ -29,17 +29,28 @@ function ModalTop({ title, description }) {
  * @param {Boolean} visible
  * @returns {JSX}
  */
-export default function Modal({ header, children, hasCloseArea, visible }) {
-	const [isVisible, setVisible] = useState(visible);
-	return isVisible && children ? (
+export default function Modal({
+	header,
+	children,
+	hasCloseArea,
+	visible,
+	callback,
+}) {
+	function handleVisible() {
+		callback(false);
+	}
+	return visible && children ? (
 		<div className="modal">
 			<div className="modal-box">
-				<span className="modal-close" onClick={() => setVisible(false)} />
+				<span className="modal-close" onClick={() => handleVisible(false)} />
 				<ModalTop {...header} />
 				<div className="modal-content">{children}</div>
 			</div>
 			{hasCloseArea && (
-				<div className="modal-close-area" onClick={() => setVisible(false)} />
+				<div
+					className="modal-close-area"
+					onClick={() => handleVisible(false)}
+				/>
 			)}
 		</div>
 	) : null;
