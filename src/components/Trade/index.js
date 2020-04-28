@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './trade.css';
 import lang from '../../languages';
-import { SimpleTable } from '../SimpleTable';
+import SimpleTable from '../SimpleTable';
 import * as WalletActions from '../../store/actions/wallet';
 import * as PriceActions from '../../store/actions/price';
 import {

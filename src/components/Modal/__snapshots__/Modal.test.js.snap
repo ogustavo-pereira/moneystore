@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Component RENDER_VALIDATION 1`] = `
+"<div className=\\"modal\\">
+  <div className=\\"modal-box\\">
+    <span className=\\"modal-close\\" onClick={[Function: onClick]} />
+    <ModalTop title=\\"help\\" description=\\"MoneyStore\\" />
+    <div className=\\"modal-content\\">
+      <p className=\\"pTest\\">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus felis ante, accumsan nec lacus hendrerit, mollis cursus orci. Sed sit amet hendrerit libero. Nunc sollicitudin purus urna, et vehicula sem tempus eu. Morbi sit amet dolor efficitur nisi efficitur vulputate. Donec in diam dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec venenatis mi augue, vitae sagittis diam accumsan sed. Pellentesque rhoncus nec urna nec pellentesque. Quisque posuere lectus est, eget pulvinar tortor tristique ut. Fusce non justo neque. Proin nec tellus dapibus, vestibulum lectus quis, gravida sapien.
+      </p>
+    </div>
+  </div>
+  <div className=\\"modal-close-area\\" onClick={[Function: onClick]} />
+</div>"
+`;

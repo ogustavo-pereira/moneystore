@@ -5,7 +5,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { SimpleTable } from '../SimpleTable';
+import SimpleTable from '../SimpleTable';
 import lang from '../../languages';
 import { formatMoney, roundNumber, formatDateFulllHour } from '../../utils';
 import PrintIcon from '../../images/printicon.svg';

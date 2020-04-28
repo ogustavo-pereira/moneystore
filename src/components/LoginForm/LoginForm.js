@@ -1,52 +1,58 @@
 /**
  * @author oguhpereira
- * User register form
+ * User login form
  */
 
 import React, { useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import lang from '../../languages';
 import { errorSpan } from '../../utils';
-import * as RegisterFormAPI from './RegisterFormAPI';
+import * as LoginAPI from './LoginFormAPI';
 
 /**
- * @function RegisterForm
+ * @function LoginForm
+ * @param {Function} login
  * @return {JSX}
  * render
  */
-export default function RegisterForm() {
-	let history = useHistory();
-	const userNameGroup = useRef(null);
+export default function LoginForm({ login }) {
+	const userAuth = localStorage.getItem('auth');
+	const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
+
+	if (userAuth in dataUser) {
+		login(userAuth);
+	}
+
 	const emailGroup = useRef(null);
 	const passwordGroup = useRef(null);
 
 	/**
 	 * @function handleSubmit
-	 * @param {Element} e element form
-	 * Save User
+	 * @param  {Event} e
+	 * Login User
 	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const target = e.target;
-
 		try {
 			if (errorValidationForm(target)) return;
 
-			const data = {
-				username: target.username.value,
+			const token = LoginAPI.login({
 				email: target.email.value,
 				password: target.password.value,
-			};
-			//call apifunction
-			const response = RegisterFormAPI.save(data);
-			if (response) {
-				history.push('/login');
+			});
+
+			if (token) {
+				login(token);
 			}
 		} catch (e) {
-			if (e === lang.email_already_registered) {
-				emailGroup.current.append(errorSpan(lang.email_already_registered));
+			if (e === lang.user_not_found) {
+				emailGroup.current.append(errorSpan(lang.user_not_found));
 				target.email.className = 'form-control input-error';
+			} else if (e === lang.password_error) {
+				passwordGroup.current.append(errorSpan(lang.password_error));
+				target.password.className = 'form-control input-error';
 			}
 		}
 	}
@@ -54,17 +60,12 @@ export default function RegisterForm() {
 	/**
 	 * @function errorValidationForm
 	 * @param {Element} target element form
-	 * @return {Boolean}
+	 * @return {boolean}
 	 * Validation of form fields
 	 */
 	function errorValidationForm(target) {
 		let error = false;
 		clearError(target);
-		if (!target.username.value) {
-			userNameGroup.current.append(errorSpan(lang.fieldempty));
-			target.username.className = 'form-control input-error';
-			error = true;
-		}
 
 		if (!target.email.value) {
 			emailGroup.current.append(errorSpan(lang.fieldempty));
@@ -84,23 +85,15 @@ export default function RegisterForm() {
 	/**
 	 * @function clearError
 	 * @param {Element} target element form
-	 * @return {Boolean}
+	 * @return {boolean}
 	 * clears form errors
 	 */
 	function clearError(target) {
 		let clear = false;
-		const userNameError = userNameGroup.current.querySelector(
-			'span.error-small'
-		);
 		const emailError = emailGroup.current.querySelector('span.error-small');
 		const passwordError = passwordGroup.current.querySelector(
 			'span.error-small'
 		);
-		if (userNameError) {
-			clear = true;
-			userNameError.remove();
-			target.username.className = 'form-control';
-		}
 		if (emailError) {
 			clear = true;
 			emailError.remove();
@@ -116,14 +109,8 @@ export default function RegisterForm() {
 
 	return (
 		<div>
-			<h1 className="title">{lang.register}</h1>
+			<h1 className="title">{lang.login}</h1>
 			<form onSubmit={handleSubmit} autoComplete="off" method="post" action="">
-				<div ref={userNameGroup} className="form-group">
-					<label className="label" htmlFor="username">
-						{lang.username}
-					</label>
-					<input className="form-control" type="text" id="username" />
-				</div>
 				<div ref={emailGroup} className="form-group">
 					<label className="label" htmlFor="email">
 						{lang.email}
@@ -136,10 +123,11 @@ export default function RegisterForm() {
 					</label>
 					<input className="form-control" type="password" id="password" />
 				</div>
-				<Link to="/login" className="mb-20 fr">
-					{lang.login}
+				<Link to="/register" className="mb-20 fr">
+					{lang.register}
 				</Link>
-				<button className="btn btn-success mt-10 clear">{lang.register}</button>
+				<button className="btn btn-success mt-10 clear">{lang.next}</button>
+
 			</form>
 		</div>
 	);

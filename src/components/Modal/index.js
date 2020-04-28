@@ -3,6 +3,7 @@
  * Modal Component
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './modal.css';
 
@@ -55,3 +56,10 @@ export default function Modal({
 		</div>
 	) : null;
 }
+
+Modal.propTypes = {
+	children: PropTypes.element.isRequired,
+	hasCloseArea: PropTypes.bool,
+	header: PropTypes.object.isRequired,
+	visible: PropTypes.bool,
+};

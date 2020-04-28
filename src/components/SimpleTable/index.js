@@ -3,8 +3,8 @@
  * Simple table component
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './simple-table.css';
-
 /**
  * @function TableRow
  * @param {Array} data
@@ -31,7 +31,7 @@ function TableRow({ data, keys }) {
  * @param {Array} keys
  * @returns {JSX}
  */
-export function SimpleTable({ title, head, content = [], keys }) {
+export default function SimpleTable({ title, head, content = [], keys }) {
 	if (content.length > 0) {
 		return (
 			<div className="table-content">
@@ -57,3 +57,10 @@ export function SimpleTable({ title, head, content = [], keys }) {
 	}
 	return <div />;
 }
+
+SimpleTable.propTypes = {
+	content: PropTypes.array,
+	head: PropTypes.array,
+	keys: PropTypes.array,
+	title: PropTypes.string.isRequired,
+};

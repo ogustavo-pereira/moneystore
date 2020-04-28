@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleTable Component RENDER_VALIDATION 1`] = `
+"<div className=\\"table-content\\">
+  <h2 className=\\"subtitle\\">
+    Simple Table
+  </h2>
+  <table className=\\"simple-table\\">
+    <thead className=\\"thead\\">
+      <tr>
+        <th className=\\"th\\">
+          Name
+        </th>
+        <th className=\\"th\\">
+          Price
+        </th>
+      </tr>
+    </thead>
+    <tbody className=\\"tbody\\">
+      <TableRow data={{...}} keys={{...}} />
+    </tbody>
+  </table>
+</div>"
+`;
