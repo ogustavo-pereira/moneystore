@@ -13,7 +13,7 @@ export default function auth(state = initProps, action) {
 				userHash: action.payload,
 				isAuthenticated: true,
 			};
-		case types.LOGGOUT_USER:
+		case types.LOGOUT_USER:
 			return {
 				...state,
 				userHash: null,

@@ -61,6 +61,7 @@ const ptBR = {
 	print: 'Imprimir',
 	dashboard: 'Dashboard',
 	last_updated: 'Última Atualização',
+	logout: 'Logout',
 };
 
 const enUS = {
@@ -127,6 +128,7 @@ const enUS = {
 	print: 'Print',
 	dashboard: 'Dashboard',
 	last_updated: 'Last Updated',
+	logout: 'Logout',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;

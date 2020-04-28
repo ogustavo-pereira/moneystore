@@ -5,7 +5,7 @@ export const login = (userHash) => ({
 	payload: userHash,
 });
 
-export const loggout = () => ({
-	type: types.LOGGOUT_USER,
+export const logout = () => ({
+	type: types.LOGOUT_USER,
 	payload: null,
 });
