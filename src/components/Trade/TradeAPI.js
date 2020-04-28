@@ -178,7 +178,7 @@ export function sell(coinData, auth) {
 					quantity: quantity,
 					date: new Date().toISOString(),
 					status: 'COMPLETED',
-					type: 'SELLL',
+					type: 'SELL',
 				});
 
 				return saveData(dataUser, auth, wallet);

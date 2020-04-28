@@ -53,6 +53,12 @@ const ptBR = {
 	from: 'De',
 	to: 'Para',
 	quantity: 'Quantidade',
+	type: 'Tipo',
+	status: 'Status',
+	date: 'Data',
+	complete_extract: 'Extrato Completo',
+	extract: 'Extrato',
+	print: 'Imprimir',
 };
 
 const enUS = {
@@ -111,6 +117,12 @@ const enUS = {
 	from: 'From',
 	to: 'To',
 	quantity: 'Quantity',
+	type: 'Type',
+	status: 'Status',
+	date: 'Date',
+	complete_extract: 'Complete extract',
+	extract: 'Extract',
+	print: 'Print',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;

@@ -1,0 +1,53 @@
+.extract [class^='type-'],
+.extract [class^='status-'],
+.extract .name {
+	font-weight: 500;
+	color: var(--blue-light);
+}
+
+.extract .type-trade,
+.extract .price-trade {
+	color: var(--blue-light);
+}
+
+.extract .type-selll,
+.extract .price-selll {
+	color: var(--green);
+}
+
+.extract .type-buy,
+.price-buy {
+	color: var(--red);
+}
+
+.extract .status-completed {
+	color: var(--green);
+}
+
+.extract .simple-table tr:nth-child(2n) {
+	background-color: #eeee;
+}
+
+.extract .status-pending,
+.extract .status-error {
+	color: var(--red);
+}
+
+.extract .header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.extract .header .btn-print {
+	border-radius: 10px;
+	height: auto;
+	margin-top: 5px;
+	padding: 15px;
+}
+
+.extract .btn-print img {
+	margin-bottom: 2px;
+	margin-right: 10px;
+	width: 17px;
+}

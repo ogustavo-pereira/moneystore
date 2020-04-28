@@ -137,7 +137,7 @@ const LatestOperation = () => {
 						)}
 					</ul>
 					<div className="text-center mt-20">
-						<Link to="/login">{languages.see_complete_extract}</Link>
+						<Link to="/extract">{languages.see_complete_extract}</Link>
 					</div>
 				</div>
 			</DinamicArea>
