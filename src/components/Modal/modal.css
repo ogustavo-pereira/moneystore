@@ -7,7 +7,7 @@
 	position: fixed;
 	top: 0;
 	width: 100%;
-	z-index: 9999999;
+	z-index: 9999;
 }
 
 .modal-box {
@@ -22,7 +22,7 @@
 	position: relative;
 	max-width: 800px;
 	margin-bottom: 20px;
-	z-index: 999999999;
+	z-index: 99999;
 }
 
 .modal .modal-close-area {

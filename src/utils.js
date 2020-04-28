@@ -1,6 +1,6 @@
 /**
  * @function errorSpan
- * @param label string to innerHTML
+ * @param {String} label
  * @returns Element Span
  * Create Node element
  */
@@ -13,7 +13,7 @@ export function errorSpan(label) {
 
 /**
  * @function formatMoney
- * @param num decimal
+ * @param {Number} num
  * @returns String
  * Separate decimal with comma and dot
  */
@@ -30,9 +30,9 @@ export function formatMoney(num = 0) {
 
 /**
  * @function formatDate
- * @param num decimal
+ * @param {Date} decimal
  * @returns String
- * Separate decimal with comma and dot
+ * format date with dd/mm/yyyy
  */
 export function formatDate(date) {
 	if (date) {
@@ -42,4 +42,21 @@ export function formatDate(date) {
 		}`.slice(-2)}/${dateFormated.getFullYear()}`;
 	}
 	return null;
+}
+
+export function disableOperators(evt) {
+	if (
+		(evt.which !== 8 && evt.which !== 0 && evt.which < 48) ||
+		(evt.which > 57 && evt.which !== 190)
+	) {
+		evt.preventDefault();
+	}
+}
+
+export function roundNumber(number) {
+	return Math.round(number * 10000) / 10000;
+}
+
+export function roundString(number) {
+	return number.replace(/(^\d*.{5})(\d*)/g, '$1').replace(/(^0+)(\d)/g, '0.$2');
 }

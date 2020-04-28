@@ -2,7 +2,11 @@
  * @author oguhpereira
  * Aplication API methods
  */
-import { API_MERCADO_BITCOIN, API_BANCO_CENTRAL } from '../../constants';
+import {
+	API_MERCADO_BITCOIN,
+	API_BANCO_CENTRAL,
+	REQUEST_FAILID,
+} from '../../constants';
 
 /**
  * @function errorResponse
@@ -24,12 +28,13 @@ export async function getBitCoinPrice() {
 		const response = await fetch(`${API_MERCADO_BITCOIN}/BTC/ticker/`);
 		if (response.status === 200) {
 			const { ticker } = await response.json();
+			sessionStorage.setItem('bitcoin', ticker.last);
 			return ticker.last;
 		} else {
 			throw errorReponse(response);
 		}
 	} catch (err) {
-		console.log('request failed', err);
+		console.log(REQUEST_FAILID, err);
 	}
 }
 
@@ -47,14 +52,16 @@ export async function getBritaPrice(date) {
 		if (response.status === 200) {
 			const { value } = await response.json();
 			if (value[0]) {
+				sessionStorage.setItem('brita', value[0].cotacaoCompra);
 				return value[0].cotacaoCompra;
 			}
+
 			return getBritaPrice(new Date(date.setDate(date.getDate() - 1)));
 		} else {
 			throw errorReponse(response);
 		}
 	} catch (err) {
-		console.log('request failed', err);
+		console.log(REQUEST_FAILID, err);
 	}
 }
 

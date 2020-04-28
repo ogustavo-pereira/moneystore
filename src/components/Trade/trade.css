@@ -1,0 +1,32 @@
+.trade .buy-coin {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.trade .buy-coin .btn-buy {
+	background-color: var(--green);
+	margin-left: auto;
+}
+
+.trade .buy-coin .buy-atention {
+	color: var(--blue-light);
+}
+
+.trade .action-button {
+	color: var(--green);
+	cursor: pointer;
+}
+
+.trade .action-button:hover {
+	color: var(--blue-light);
+}
+
+.trade .action-button div {
+	align-items: center;
+	display: inline-flex;
+}
+
+.trade .action-button img {
+	margin-right: 4px;
+	margin-top: 1px;
+}

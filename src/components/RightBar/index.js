@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 
 import './rightbar.css';
-import { formatMoney } from '../../utils';
+import { formatMoney, formatDate } from '../../utils';
 import languages from '../../languages';
 import BitcoinIcon from '../../images/bitcoingreenbg.svg';
 import BritaIcon from '../../images/britagreenbg.svg';
@@ -61,7 +61,7 @@ const Coin = ({ value, label, src }) =>
 		<div className="coin">
 			<img className="coin-icon" src={src} alt={label} title={label} />
 			<div>
-				<span className="value">{formatMoney(value)}</span>
+				<span className="value">R$ {formatMoney(value)}</span>
 				<span className="name">{label}</span>
 			</div>
 		</div>
@@ -73,12 +73,23 @@ const Coin = ({ value, label, src }) =>
  */
 const Coins = () => {
 	const wallet = useSelector((state) => state.wallet);
+	const price = useSelector((state) => state.price);
 	return (
 		<div className="my-coins">
 			<DinamicArea title={languages.your_coins}>
-				{wallet.coins.map(({ value, name }, index) => (
-					<Coin key={index} value={value} label={name} src={findIcon(name)} />
-				))}
+				{wallet.coins.map(({ quantity, name }, index) => {
+					if (price[name.toLowerCase()] && quantity) {
+						return (
+							<Coin
+								key={index}
+								value={price[name.toLowerCase()] * quantity}
+								label={name}
+								src={findIcon(name)}
+							/>
+						);
+					}
+					return null;
+				})}
 			</DinamicArea>
 		</div>
 	);
@@ -96,9 +107,9 @@ const OperationItem = ({ coin, value, date }) =>
 		<li className="operation-item">
 			<div className="operation-detail">
 				<span className="coin">{coin}</span>
-				<span className="value">{formatMoney(value)}</span>
+				<span className="value">R$ {formatMoney(value)}</span>
 			</div>
-			<span className="date">{date}</span>
+			<span className="date">{formatDate(date)}</span>
 		</li>
 	) : null;
 
@@ -107,20 +118,23 @@ const OperationItem = ({ coin, value, date }) =>
  * @returns {JSX}
  */
 const LatestOperation = () => {
-	const wallet = useSelector((state) => state.wallet);
+	const { operations } = useSelector((state) => state.wallet);
+	const Op = [].concat(operations).reverse();
 	return (
 		<div className="latest-operations">
 			<DinamicArea title={languages.latest_operations}>
 				<div className="operations">
 					<ul className="operations-list">
-						{wallet.operations.map(({ value, name, date }, index) => (
-							<OperationItem
-								key={index}
-								coin={name}
-								value={value}
-								date={date}
-							/>
-						))}
+						{Op.slice(0, 5).map(
+							({ value, quantity, price, name, date }, index) => (
+								<OperationItem
+									key={index}
+									coin={name}
+									value={quantity * price}
+									date={date}
+								/>
+							)
+						)}
 					</ul>
 					<div className="text-center mt-20">
 						<Link to="/login">{languages.see_complete_extract}</Link>
@@ -142,7 +156,7 @@ const BalanceItem = ({ label, value }) => {
 		return (
 			<div>
 				<span className="description-balance">{label}</span>
-				<span className="money-balance">{formatMoney(value)}</span>
+				<span className="money-balance">R$ {formatMoney(value)}</span>
 			</div>
 		);
 	}
@@ -166,7 +180,7 @@ const Balance = (props) => {
 				<br />
 				<BalanceItem
 					label={languages.total_invested}
-					value={wallet.totalInvested || 0}
+					value={wallet.totalInvested}
 				/>
 			</DinamicArea>
 		</div>
@@ -189,6 +203,7 @@ function RightBar() {
 
 const mapStateToProps = (state) => ({
 	wallet: state.wallet,
+	price: state.price,
 });
 
 export default connect(mapStateToProps, null)(RightBar);

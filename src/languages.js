@@ -27,16 +27,26 @@ const ptBR = {
 	total: 'Total',
 	unit: 'Unidades',
 	select_quantity_you_want_buy: 'Selecione a quantidade que deseja comprar',
-	how_much_you_want_buy: 'Quanto deseja comprars?',
+	select_quantity_you_want_sell: 'Selecione a quantidade que deseja vender',
+	how_much_you_want_buy: 'Quanto deseja comprar?',
+	how_much_you_want_sell: 'Quanto deseja vender?',
 	coin: 'Moeda',
 	atention_buy:
 		'Atenção, ao clicar em comprar você esta confirmando a compra desta quantia em moedas',
+	atention_sell:
+		'Atenção, ao clicar em vender você esta confirmando a venda desta quantia',
 	field_require_number: 'Você deve informar um número maior que 0',
 	price: 'Preço',
-	invalid_money: 'Você não tem este dinheiro para a compra',
+	invalid_money:
+		'Você não tem este dinheiro para a compra. Diminua o valor e tente novamente',
 	invalid_quote: 'Sua moeda recebeu outra cotação',
+	invalid_quantity:
+		'Você não tem essa quantia disponivel para venda. Diminua o valor e tente novamente',
 	invalid_quantity_very_short:
 		'Para finalizar a operação é necessario que o total seja maior que R$ 1,00',
+	quantity_you_have: 'Quantidade que você tem',
+	successful_sale: 'Venda bem sucedida',
+	successful_purchase: 'Compra  bem sucedida',
 };
 
 const enUS = {
@@ -69,16 +79,26 @@ const enUS = {
 	total: 'Total',
 	unit: 'Unit',
 	select_quantity_you_want_buy: 'Select the quantity you want to buy',
+	select_quantity_you_want_sell: 'Select the quantity you want to sell',
 	how_much_you_want_buy: 'How much do you want to buy?',
+	how_much_you_want_sell: 'How much do you want to sell?',
 	coin: 'Coin',
 	atention_buy:
 		'Attention, by clicking on buy you are confirming the purchase of this amount in coins',
+	atention_sell:
+		'Attention, by clicking on sell, you confirm the sale of this quantity',
 	field_require_number: 'You must enter a number greater than 0',
 	price: 'Price',
-	invalid_money: 'You do not have that money to buy',
+	invalid_money:
+		'You do not have that money to buy. Decrease the value and try again',
 	invalid_quote: 'Your currency received another quote',
+	invalid_quantity:
+		'You do not have this amount available for sale. Decrease the value and try again',
 	invalid_quantity_very_short:
 		'To complete the operation, the total must be greater than R$ 1,00',
+	quantity_you_have: 'Quantity you have',
+	successful_sale: 'Successful sale',
+	successful_purchase: 'Successful purchase',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;
