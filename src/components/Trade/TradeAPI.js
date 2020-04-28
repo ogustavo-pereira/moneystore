@@ -95,12 +95,11 @@ export function buy(coinData, auth) {
 	const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
 	if (dataUser[auth]) {
 		const wallet = JSON.parse(atob(dataUser[auth]));
-
 		const WalletIndex = wallet.coins.findIndex(
 			(e) => e.name.toLowerCase() === coinData.name.toLowerCase()
 		);
 		if (WalletIndex !== -1) {
-			if (wallet.money - price > 0) {
+			if (wallet.money - price >= 0) {
 				wallet.money -= price;
 				if (wallet.totalInvested) {
 					wallet.totalInvested = roundNumber(wallet.totalInvested + price);
@@ -159,9 +158,10 @@ export function sell(coinData, auth) {
 		const WalletIndex = wallet.coins.findIndex(
 			(e) => e.name.toLowerCase() === coinData.name.toLowerCase()
 		);
-		const walletQuantity = roundNumber(wallet.coins[WalletIndex].quantity) || 0;
 		if (WalletIndex !== -1) {
-			if (walletQuantity >= quantity) {
+			const walletQuantity =
+				roundNumber(wallet.coins[WalletIndex].quantity) || 0;
+			if (walletQuantity - quantity >= 0) {
 				wallet.money += price;
 				if (wallet.totalInvested) {
 					wallet.totalInvested = roundNumber(wallet.totalInvested - price);
@@ -189,6 +189,87 @@ export function sell(coinData, auth) {
 				status: 500,
 			};
 		}
+	} else {
+		return {
+			message: INVALID_TOKEN,
+			status: 500,
+		};
+	}
+}
+
+/**
+ * @function trade
+ * @param {Object} tradeData
+ * @param {String} auth
+ * @returns {Object}
+ */
+export function trade(tradeData, auth) {
+	const { tradeCoinQuantity, fromCoin, toCoin } = tradeData;
+	if (!tradeData.tradeCoinQuantity) {
+		return {
+			message: INVALID_PARAM,
+			parm: 'tradeCoinQuantity',
+			status: 500,
+		};
+	}
+
+	const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
+	if (dataUser[auth]) {
+		const wallet = JSON.parse(atob(dataUser[auth]));
+		const fromCoinIndex = wallet.coins.findIndex(
+			(e) => e.name.toLowerCase() === tradeData.fromCoin.toLowerCase()
+		);
+		const toCoinIndex = wallet.coins.findIndex(
+			(e) => e.name.toLowerCase() === tradeData.toCoin.toLowerCase()
+		);
+
+		if (fromCoinIndex !== -1 && toCoinIndex !== -1 && tradeCoinQuantity > 0) {
+			const fromCoinQuantity =
+				roundNumber(wallet.coins[fromCoinIndex].quantity) || 0;
+
+			const tradeCoinValue = roundNumber(
+				sessionStorage.getItem(fromCoin.toLowerCase()) * tradeCoinQuantity
+			);
+
+			const toQuote = roundNumber(sessionStorage.getItem(toCoin.toLowerCase()));
+
+			if (fromCoinQuantity - tradeCoinQuantity >= 0 && toQuote > 0) {
+				wallet.coins[fromCoinIndex].quantity = roundNumber(
+					wallet.coins[fromCoinIndex].quantity - tradeData.tradeCoinQuantity
+				);
+
+				wallet.coins[toCoinIndex].quantity = roundNumber(
+					wallet.coins[toCoinIndex].quantity + tradeCoinValue / toQuote
+				);
+
+				if (
+					wallet.coins[toCoinIndex].quantity < 0.0001 ||
+					tradeCoinValue <= 1
+				) {
+					return {
+						message: INSUFFICIENT_QUANTITY,
+						status: 500,
+					};
+				}
+
+				wallet.operations.push({
+					name: toCoin,
+					price: tradeCoinValue,
+					quantity: tradeCoinValue / toQuote,
+					from: fromCoin,
+					to: toCoin,
+					date: new Date().toISOString(),
+					status: 'COMPLETED',
+					type: 'TRADE',
+				});
+
+				return saveData(dataUser, auth, wallet);
+			}
+		}
+		return {
+			message: INSUFFICIENT_QUANTITY,
+			status: 500,
+		};
 	} else {
 		return {
 			message: INVALID_TOKEN,

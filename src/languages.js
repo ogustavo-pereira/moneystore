@@ -30,6 +30,7 @@ const ptBR = {
 	select_quantity_you_want_sell: 'Selecione a quantidade que deseja vender',
 	how_much_you_want_buy: 'Quanto deseja comprar?',
 	how_much_you_want_sell: 'Quanto deseja vender?',
+	how_much_you_want_trade: 'Quanto deseja trocar?',
 	coin: 'Moeda',
 	atention_buy:
 		'Atenção, ao clicar em comprar você esta confirmando a compra desta quantia em moedas',
@@ -47,6 +48,11 @@ const ptBR = {
 	quantity_you_have: 'Quantidade que você tem',
 	successful_sale: 'Venda bem sucedida',
 	successful_purchase: 'Compra  bem sucedida',
+	successful_trade: 'Troca bem sucedida',
+	trade: 'Trocar',
+	from: 'De',
+	to: 'Para',
+	quantity: 'Quantidade',
 };
 
 const enUS = {
@@ -82,6 +88,7 @@ const enUS = {
 	select_quantity_you_want_sell: 'Select the quantity you want to sell',
 	how_much_you_want_buy: 'How much do you want to buy?',
 	how_much_you_want_sell: 'How much do you want to sell?',
+	how_much_you_want_trade: 'How much do you want to trade?',
 	coin: 'Coin',
 	atention_buy:
 		'Attention, by clicking on buy you are confirming the purchase of this amount in coins',
@@ -99,6 +106,11 @@ const enUS = {
 	quantity_you_have: 'Quantity you have',
 	successful_sale: 'Successful sale',
 	successful_purchase: 'Successful purchase',
+	successful_trade: 'Successful trade',
+	trade: 'Trade',
+	from: 'From',
+	to: 'To',
+	quantity: 'Quantity',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;

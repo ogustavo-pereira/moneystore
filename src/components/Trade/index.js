@@ -18,6 +18,7 @@ import {
 	errorSpan,
 	disableOperators,
 	roundString,
+	roundNumber,
 } from '../../utils';
 import Modal from '../Modal';
 import * as TradeAPI from './TradeAPI';
@@ -26,9 +27,11 @@ import {
 	INVALID_QUOTE,
 	PARAM_VERYSHORT,
 	INSUFFICIENT_QUANTITY,
+	INVALID_PARAM,
 } from '../../constants';
 import BuyIcon from '../../images/buybtn.svg';
 import SellIcon from '../../images/sellbtn.svg';
+import TradeIcon from '../../images/tradebtn.svg';
 
 /**
  * @function errorValidationForm
@@ -149,7 +152,7 @@ function BuyCoin({ coinName, coinPrice, callback }) {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="buy-coin" autoComplete="off">
-				<p className="buy-atention">{lang.atention_buy}</p>
+				<p className="description-atention">{lang.atention_buy}</p>
 				<div className="form-group">
 					<label className="label" htmlFor="coin">
 						{lang.coin}
@@ -276,7 +279,7 @@ function SellCoin({ coinName, coinPrice, coinUserQuantity, callback }) {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="buy-coin" autoComplete="off">
-				<p className="buy-atention">{lang.atention_sell}</p>
+				<p className="description-atention">{lang.atention_sell}</p>
 				<div className="form-group">
 					<label className="label" htmlFor="coin">
 						{lang.coin}
@@ -327,6 +330,7 @@ function SellCoin({ coinName, coinPrice, coinUserQuantity, callback }) {
 						id="quantity"
 						value={coinQuantity}
 						onChange={handleChangePrice}
+						onKeyDown={disableOperators}
 					/>
 				</div>
 				<div className="form-group">
@@ -349,6 +353,161 @@ function SellCoin({ coinName, coinPrice, coinUserQuantity, callback }) {
 }
 
 /**
+ * @function TradeCoin
+ * @param {String} coinName
+ * @param {Number} coinPrice
+ * @param {Number} coinUserQuantity quantity coin user have.
+ * @param {Function} callback
+ * @return {JSX}
+ * Modal for Trade Coin
+ */
+function TradeCoin({
+	fromCoin,
+	fromCoinQuantity,
+	fromCoinPrice,
+	toCoin,
+	callback,
+}) {
+	const [coinValue, setCoinValue] = useState(0);
+	const [coinQuantity, setCoinQuantity] = useState(0);
+	const auth = useSelector((state) => state.auth);
+
+	function handleChangePrice(event) {
+		const { target } = event || {};
+		let value = roundString(target.value);
+		if (value * fromCoinPrice < fromCoinQuantity * fromCoinPrice) {
+			setCoinQuantity(value);
+			setCoinValue(value * fromCoinPrice);
+		} else {
+			setCoinQuantity(fromCoinQuantity);
+			setCoinValue(fromCoinQuantity * fromCoinPrice);
+		}
+	}
+
+	function handleSubmit(event) {
+		event.preventDefault();
+		const form = event.target;
+
+		const quantityError = form.quantity.parentElement.querySelector(
+			'span.error-small'
+		);
+		if (quantityError) {
+			quantityError.remove();
+			form.quantity.className = 'form-control';
+		}
+		const response = TradeAPI.trade(
+			{
+				fromCoin,
+				tradeCoinQuantity: coinQuantity,
+				toCoin,
+			},
+			auth.userHash
+		);
+		if (response.status === 200) {
+			toast.success(lang.successful_trade, {
+				position: 'top-right',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+			callback(response.wallet);
+		} else {
+			if (
+				response.message === INVALID_PARAM ||
+				response.message === INSUFFICIENT_QUANTITY
+			) {
+				form.quantity.parentElement.append(errorSpan(lang.invalid_quantity));
+				form.quantity.className = 'form-control input-error';
+			}
+		}
+
+		return;
+	}
+
+	return (
+		<div>
+			<form onSubmit={handleSubmit} className="buy-coin" autoComplete="off">
+				<p className="description-atention">{lang.atention_sell}</p>
+				<div className="form-group">
+					<label className="label" htmlFor="from">
+						{lang.from}
+					</label>
+					<input
+						className="form-control"
+						name="from"
+						type="text"
+						id="from"
+						disabled
+						value={fromCoin}
+					/>
+				</div>
+				<div className="form-group">
+					<label className="label" htmlFor="to">
+						{lang.to}
+					</label>
+					<input
+						className="form-control"
+						name="to"
+						disabled
+						id="to"
+						type="text"
+						value={toCoin}
+					/>
+				</div>
+				<div className="form-group">
+					<label className="label" htmlFor="to_value">
+						{`${lang.quantity_you_have}`}
+					</label>
+					<input
+						className="form-control"
+						name="to_value"
+						disabled
+						id="to_value"
+						type="text"
+						value={`R$ ${formatMoney(fromCoinPrice * fromCoinQuantity)}`}
+					/>
+				</div>
+				<div className="form-group">
+					<label className="label" htmlFor="quantity">
+						{`${lang.how_much_you_want_trade} (${fromCoin})`}
+					</label>
+					<input
+						className="form-control"
+						name="quantity"
+						id="quantity"
+						type="text"
+						value={coinQuantity}
+						onChange={handleChangePrice}
+						onKeyDown={disableOperators}
+					/>
+				</div>
+				<div className="form-group">
+					<label className="label" htmlFor="price">
+						{`${lang.total} (Min. R$${formatMoney(
+							roundNumber(0.0001 * fromCoinPrice) > 1
+								? roundNumber(0.0001 * fromCoinPrice)
+								: 1
+						)})`}
+					</label>
+					<input
+						className="form-control"
+						name="price"
+						id="to"
+						type="text"
+						disabled
+						value={`R$ ${formatMoney(coinValue)}`}
+					/>
+				</div>
+				<button className="btn btn-success mt-10 btn-buy">{lang.trade}</button>
+			</form>
+		</div>
+	);
+}
+
+/**
  * @function Trade
  * @param {Object} wallet
  * @param {Object} price
@@ -358,6 +517,7 @@ function SellCoin({ coinName, coinPrice, coinUserQuantity, callback }) {
 function Trade({ wallet, price, setWallet }) {
 	const [buyCoin, setBuyCoin] = useState(null);
 	const [sellCoin, setSellCoin] = useState(null);
+	const [tradeCoin, setTradeCoin] = useState(null);
 
 	/**
 	 * @function TableAction
@@ -368,7 +528,7 @@ function Trade({ wallet, price, setWallet }) {
 	 * @returns {JSX}
 	 */
 	function TableAction({ name, id, isSell, quantity = 0 }) {
-		function handleShowBuyModal() {
+		function handleShowModal() {
 			if (isSell) {
 				setSellCoin({
 					coinName: name,
@@ -383,7 +543,7 @@ function Trade({ wallet, price, setWallet }) {
 			}
 		}
 		return (
-			<span className="action-button" onClick={() => handleShowBuyModal(name)}>
+			<span className="action-button" onClick={() => handleShowModal(name)}>
 				{isSell ? (
 					<div>
 						<img src={SellIcon} alt={lang.sell} title={lang.sell} />
@@ -395,6 +555,35 @@ function Trade({ wallet, price, setWallet }) {
 						<span>{lang.buy}</span>
 					</div>
 				)}
+			</span>
+		);
+	}
+
+	/**
+	 * @function TableAction
+	 * @param {String} from
+	 * @param {String} to
+	 * @returns {JSX}
+	 */
+	function TradeAction({ from, to }) {
+		function handleShowModal(fromCoin, toCoin) {
+			const fromIndex = wallet.coins.findIndex(
+				(e) => e.name.toLowerCase() === fromCoin.toLowerCase()
+			);
+
+			setTradeCoin({
+				fromCoin,
+				toCoin,
+				fromCoinQuantity: wallet.coins[fromIndex].quantity,
+				fromCoinPrice: price[fromCoin.toLowerCase()],
+			});
+		}
+		return (
+			<span className="action-button" onClick={() => handleShowModal(from, to)}>
+				<div>
+					<img src={TradeIcon} alt={lang.trade} title={lang.trade} />
+					<span>{lang.trade}</span>
+				</div>
 			</span>
 		);
 	}
@@ -450,6 +639,23 @@ function Trade({ wallet, price, setWallet }) {
 		data: dataSellTable(wallet.coins, price),
 	};
 
+	const tradeTable = {
+		head: [lang.from, lang.to, lang.trade],
+		keys: ['from', 'to', 'action'],
+		data: [
+			{
+				from: 'Biticoin',
+				to: 'Brita',
+				action: <TradeAction from="Bitcoin" to="Brita" />,
+			},
+			{
+				from: 'Brita',
+				to: 'Bitcoin',
+				action: <TradeAction from="Brita" to="Bitcoin" />,
+			},
+		],
+	};
+
 	const headerModal = sellCoin
 		? {
 				title: lang.sell,
@@ -468,6 +674,7 @@ function Trade({ wallet, price, setWallet }) {
 		setWallet(wallet);
 		setBuyCoin(null);
 		setSellCoin(null);
+		setTradeCoin(null);
 	}
 
 	return (
@@ -485,6 +692,12 @@ function Trade({ wallet, price, setWallet }) {
 				content={sellTable.data}
 				keys={sellTable.keys}
 			/>
+			<SimpleTable
+				title={lang.trade}
+				head={tradeTable.head}
+				content={tradeTable.data}
+				keys={tradeTable.keys}
+			/>
 			<Modal
 				header={headerModal}
 				visible={sellCoin || buyCoin}
@@ -499,6 +712,18 @@ function Trade({ wallet, price, setWallet }) {
 				) : (
 					<BuyCoin {...buyCoin} callback={(wallet) => updateWallet(wallet)} />
 				)}
+			</Modal>
+			<Modal
+				header={{
+					title: lang.trade,
+				}}
+				visible={tradeCoin}
+				callback={() => {
+					setTradeCoin(null);
+				}}
+				hasCloseArea
+			>
+				<TradeCoin {...tradeCoin} callback={(wallet) => updateWallet(wallet)} />
 			</Modal>
 			<ToastContainer
 				position="top-right"
