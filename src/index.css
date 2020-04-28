@@ -4,27 +4,26 @@
  */
 
 body {
-  margin: 0;
-  font-family: 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+		'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 :root {
 	--white: #fff;
-	--green: #29CB97;
+	--green: #29cb97;
 	--green-dark: #163920;
 	--gray: #979797;
-	--gray-light: #F2F2F2;
-	--blue-dark: #31394D;
-	--blue-light: #748AA1;
-	--red: #DE4244;
+	--gray-light: #f2f2f2;
+	--blue-dark: #31394d;
+	--blue-light: #748aa1;
+	--red: #de4244;
 }
 
 .container {
@@ -67,7 +66,7 @@ code {
 
 .form-group .form-control:focus {
 	border-color: var(--blue-dark);
-	transition: .1s border;
+	transition: 0.1s border;
 	outline: none;
 }
 
@@ -88,10 +87,10 @@ code {
 	height: 55px;
 	min-width: 150px;
 	padding: 0 20px;
-	transition: all .4s;
-	-webkit-transition: all .4s;
-	-o-transition: all .4s;
-	-moz-transition: all .4s;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
 }
 
 .btn:focus {
@@ -119,8 +118,8 @@ code {
 }
 
 .col-6 {
-	padding: 15px;
-	width: 50%;
+	margin: 15px;
+	width: calc(100% / 2 - 30px);
 }
 
 a {
@@ -145,14 +144,17 @@ a:hover {
 .error-small {
 	animation: fadeIn 0.5s;
 	color: var(--red);
-	font-size: .9em;
+	font-size: 0.9em;
 	padding: 4px;
 }
 
-
 @keyframes fadeIn {
-	from {opacity: 0;}
-	to {opacity: 1;}
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 .form-control.input-error {
@@ -165,7 +167,7 @@ a:hover {
 }
 
 .main-content {
-	background: #F5F6FA;
+	background: #f5f6fa;
 	box-sizing: border-box;
 	padding: 40px;
 	margin-left: 80px;
@@ -190,10 +192,10 @@ a:hover {
 
 .left-content {
 	background: white;
-	-webkit-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
-	-moz-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
-	box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
-    height: 100%;
+	-webkit-box-shadow: 0px 0px 26px -12px rgba(0, 0, 0, 0.37);
+	-moz-box-shadow: 0px 0px 26px -12px rgba(0, 0, 0, 0.37);
+	box-shadow: 0px 0px 26px -12px rgba(0, 0, 0, 0.37);
+	height: 100%;
 	left: 0;
 	position: fixed;
 	top: 0;
@@ -203,10 +205,10 @@ a:hover {
 
 .right-content {
 	background: white;
-	-webkit-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
-	-moz-box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
-	box-shadow: 0px 0px 26px -12px rgba(0,0,0,0.37);
-    height: 100%;
+	-webkit-box-shadow: 0px 0px 26px -12px rgba(0, 0, 0, 0.37);
+	-moz-box-shadow: 0px 0px 26px -12px rgba(0, 0, 0, 0.37);
+	box-shadow: 0px 0px 26px -12px rgba(0, 0, 0, 0.37);
+	height: 100%;
 	right: 0;
 	position: fixed;
 	top: 0;
@@ -228,28 +230,38 @@ a:hover {
 
 .container-center {
 	align-items: center;
-    background-color: #ebebeb;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    min-height: 100vh;
+	background-color: #ebebeb;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	min-height: 100vh;
 	width: 100%;
 }
 
-.wrap-box-center{
+.wrap-box-center {
 	padding: 45px;
-    position: relative;
+	position: relative;
 	width: 560px;
 }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 /* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+.custom-tooltip {
+	background-color: white;
+	box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+	padding: 5px;
+}
+.custom-tooltip p {
+	margin: 0px;
+	padding: 1px;
 }

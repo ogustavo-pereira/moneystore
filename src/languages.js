@@ -59,6 +59,8 @@ const ptBR = {
 	complete_extract: 'Extrato Completo',
 	extract: 'Extrato',
 	print: 'Imprimir',
+	dashboard: 'Dashboard',
+	last_updated: 'Última Atualização',
 };
 
 const enUS = {
@@ -123,6 +125,8 @@ const enUS = {
 	complete_extract: 'Complete extract',
 	extract: 'Extract',
 	print: 'Print',
+	dashboard: 'Dashboard',
+	last_updated: 'Last Updated',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;
