@@ -2,7 +2,7 @@
  * @author oguhpereira
  * Aplication
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -19,6 +19,7 @@ import { setWallet as setWalletAction } from '../../store/actions/wallet';
 import * as ApplicationAPI from './AplicationAPI';
 import { setBitcoin, setBrita } from '../../store/actions/price';
 import { login } from '../../store/actions/auth';
+import CloseIcon from '../../images/close.svg';
 
 const hist = createBrowserHistory();
 
@@ -29,6 +30,15 @@ const hist = createBrowserHistory();
  * @returns {JSX}
  */
 function Container({ children, isPublic }) {
+	const [collapseMenu, setCollapseMenu] = useState(
+		sessionStorage.getItem('collapse-menu') || true
+	);
+
+	function handleCollapse() {
+		sessionStorage.getItem('collapse-menu', !collapseMenu);
+		setCollapseMenu(!collapseMenu);
+	}
+
 	return isPublic ? (
 		<div className="container-center">
 			<div className="box wrap-box-center">{children}</div>
@@ -39,9 +49,32 @@ function Container({ children, isPublic }) {
 				<LeftBar />
 			</div>
 			<div className="main-content">{children}</div>
-			<div className="right-content">
+			<div
+				style={{
+					width: collapseMenu && window.screen.width < 950 ? '' : '300px',
+					opacity: collapseMenu && window.screen.width < 950 ? '' : 1,
+				}}
+				className="right-content"
+			>
 				<RightBar />
 			</div>
+			{window.screen.width < 950 && (
+				<span
+					style={{
+						right: collapseMenu ? '5px' : '285px',
+					}}
+					onClick={() => handleCollapse()}
+					className="collapse-btn"
+				>
+					<img
+						width="20px"
+						style={{ transform: collapseMenu ? 'rotate(180deg)' : '' }}
+						src={CloseIcon}
+						alt="Collapse"
+						title="Collapse"
+					/>
+				</span>
+			)}
 		</div>
 	);
 }
@@ -82,8 +115,10 @@ function Application({ auth, setWallet, setBitcoin, setBrita }) {
 	useEffect(() => {
 		if (auth.isAuthenticated) {
 			getWallet();
-			setInterval(watchBitcoin(), 30000);
-			setInterval(watchBrita(), 3600000);
+			setInterval(() => watchBitcoin(), 30000);
+			setInterval(() => watchBrita(), 3600000);
+			watchBitcoin();
+			watchBrita();
 			return;
 		}
 		async function watchBitcoin() {

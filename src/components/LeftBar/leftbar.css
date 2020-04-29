@@ -1,17 +1,18 @@
-
 .leftbar {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 100%;
+	min-height: 100%;
 }
 
 .leftbar .logo {
-	margin-top: 15px;
+	margin-top: 55px;
 	text-align: center;
 }
 
 .leftbar .logo .icon-md {
+	box-sizing: border-box;
+	padding: 5px;
 	width: 60px;
 }
 .leftbar .logo .icon-md:hover {
@@ -29,7 +30,7 @@
 	border-color: var(--green);
 	display: inline-block;
 	font-weight: 600;
-	padding: 25px;
+	padding: 15px;
 }
 
 .leftbar .navigation-item.active {
@@ -37,9 +38,9 @@
 	border-right: 9px solid var(--green);
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
-	-webkit-box-shadow: 0px 3px 30px -12px rgba(0,0,0,0.37);
-	-moz-box-shadow: 0px 3px 30px -12px rgba(0,0,0,0.37);
-	box-shadow: 0px 3px 30px -12px rgba(0,0,0,0.37);
+	-webkit-box-shadow: 0px 3px 30px -12px rgba(0, 0, 0, 0.37);
+	-moz-box-shadow: 0px 3px 30px -12px rgba(0, 0, 0, 0.37);
+	box-shadow: 0px 3px 30px -12px rgba(0, 0, 0, 0.37);
 }
 
 .leftbar .navigation-item:hover {
@@ -68,4 +69,37 @@
 	cursor: pointer;
 	margin-bottom: 10px;
 	text-align: center;
+}
+@media (max-width: 600px) {
+	.leftbar {
+		align-items: center;
+		bottom: 0;
+		flex-direction: row;
+		height: 70px;
+		justify-content: space-around;
+		top: unset;
+		width: 100%;
+	}
+	.leftbar .logo {
+		margin-top: 10px;
+	}
+
+	.leftbar .help,
+	.leftbar .logout {
+		display: block;
+		float: left;
+		margin: 10px;
+	}
+
+	.leftbar .navigation {
+		min-height: 0px;
+	}
+
+	.leftbar .navigation-item.active {
+		background-color: var(--green-dark);
+		border-top: 10px solid var(--green--dark);
+		border-right: 0px;
+		border-radius: 10px;
+	}
+
 }

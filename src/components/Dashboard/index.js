@@ -129,32 +129,23 @@ export default function Dashboard(props) {
 		new Date()
 	)}`;
 	return (
-		<div>
+		<div style={{ minWidth: '550px' }}>
 			<h1 className="title">{lang.dashboard}</h1>
-			<div className="row">
-				<div className="col-6">
-					<Card title="Bitcoin" description={lang.latest_operations}>
-						<CustomLineChart data={dataLineChart('bitcoin')} />
-					</Card>
-				</div>
-				<div className="col-6">
-					<Card title="Brita" description={lang.latest_operations}>
-						<CustomLineChart data={dataLineChart('brita')} />
-					</Card>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-6">
-					<Card title={lang.your_wallet} description={descriptionPie}>
-						<PieChartCustom data={dataPieChart('money')} />
-					</Card>
-				</div>
-				<div className="col-6">
-					<Card title={lang.your_coins} description={descriptionPie}>
-						<PieChartCustom data={dataPieChart('coins')} />
-					</Card>
-				</div>
-			</div>
+			<Card title={lang.your_wallet} description={descriptionPie}>
+				<PieChartCustom data={dataPieChart('money')} />
+			</Card>
+
+			<Card title={lang.your_coins} description={descriptionPie}>
+				<PieChartCustom data={dataPieChart('coins')} />
+			</Card>
+			<h1 className="title">{lang.latest_operations}</h1>
+			<Card title="Bitcoin" description={lang.extract}>
+				<CustomLineChart data={dataLineChart('bitcoin')} />
+			</Card>
+
+			<Card title="Brita" description={lang.extract}>
+				<CustomLineChart data={dataLineChart('brita')} />
+			</Card>
 		</div>
 	);
 }
@@ -240,21 +231,12 @@ function PieChartCustom({ data }) {
 		}
 
 		return (
-			<ResponsiveContainer width="100%" height={400}>
-				<PieChart
-					margin={{
-						top: 0,
-						right: 30,
-						left: 50,
-						bottom: 5,
-					}}
-				>
+			<ResponsiveContainer width="100%" height={300}>
+				<PieChart>
 					<Pie
 						activeIndex={activeIndex}
 						activeShape={renderActiveShape}
 						data={data}
-						cx={200}
-						cy={200}
 						innerRadius={60}
 						outerRadius={80}
 						fill="var(--green)"

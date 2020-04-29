@@ -1,3 +1,6 @@
+.trade {
+	min-width: 450px;
+}
 .trade .buy-coin {
 	display: flex;
 	flex-wrap: wrap;

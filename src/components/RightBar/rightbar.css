@@ -4,7 +4,7 @@
 }
 
 .rightbar .balance,.rightbar .my-coins, .rightbar .latest-operations {
-	padding: 25px;
+	padding: 20px;
 }
 
 .rightbar .header {
@@ -17,6 +17,7 @@
 
 .rightbar .header .title, .rightbar .money-balance  {
 	color: var(--blue-dark);
+	font-size: 1em;
 	margin: 5px 0px 5px 0px;
 }
 
@@ -48,17 +49,16 @@
 .rightbar .description-balance {
 	display: block;
 	font-size: 1em;
-	padding-bottom: 5px;
 }
 .rightbar .money-balance {
-	font-size: 1.45em;
+	font-size: 1.4em;
 	font-weight: 600;
 }
 
 .rightbar .my-coins .coin {
 	align-items: center;
 	display: inline-flex;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 	width: 100%;
 }
 

@@ -8,7 +8,6 @@
     Simple application example using React
 </h4>
 
-
 [![Project Dependencies](https://david-dm.org/oguhpereira/moneystore/dev-status.svg)](https://david-dm.org/oguhpereira/moneystore)
 [![devDependencies Status](https://david-dm.org/oguhpereira/moneystore/dev-status.svg)](https://david-dm.org/oguhpereira/moneystore?type=dev)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f34192e6f38642fe880718a475346f7b)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oguhpereira/moneystore&amp;utm_campaign=Badge_Grade)
@@ -16,35 +15,35 @@
 
 ## How to run
 
-* Clone repository and install dependencies:
+*  Clone repository and install dependencies:
 
-```
+```shell
 $ git clone git@github.com:oguhpereira/moneystore.git
 $ cd moneystore
 $ yarn
 ```
 
-* Run application
+*  Run application
 
-```
+```shell
 yarn start
 ```
 
 ## How run test
 
-```
+```shell
 yarn test
 ```
 
 ## How to build
 
-```
+```shell
 yarn build
 ```
 
 ## Component Storybook
 
-```
+```shell
 yarn storybook
 ```
 

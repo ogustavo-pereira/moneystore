@@ -700,7 +700,7 @@ function Trade({ wallet, price, setWallet }) {
 			/>
 			<Modal
 				header={headerModal}
-				visible={sellCoin || buyCoin}
+				visible={(sellCoin || buyCoin) && true}
 				callback={() => {
 					setBuyCoin(null);
 					setSellCoin(null);
@@ -717,7 +717,7 @@ function Trade({ wallet, price, setWallet }) {
 				header={{
 					title: lang.trade,
 				}}
-				visible={tradeCoin}
+				visible={tradeCoin && true}
 				callback={() => {
 					setTradeCoin(null);
 				}}

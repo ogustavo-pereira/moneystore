@@ -34,7 +34,7 @@ export default function Modal({
 	header,
 	children,
 	hasCloseArea,
-	visible,
+	visible = false,
 	callback,
 }) {
 	function handleVisible() {
