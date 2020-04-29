@@ -11,7 +11,7 @@
 
 [![Project Dependencies](https://david-dm.org/oguhpereira/moneystore/dev-status.svg)](https://david-dm.org/oguhpereira/moneystore)
 [![devDependencies Status](https://david-dm.org/oguhpereira/moneystore/dev-status.svg)](https://david-dm.org/oguhpereira/moneystore?type=dev)
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/8580571ba024426d9649e9ab389bd5dd)](https://www.codacy.com/app/oguhpereira/moneystore)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f34192e6f38642fe880718a475346f7b)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oguhpereira/moneystore&amp;utm_campaign=Badge_Grade)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/oguhpereira/moneystore/blob/master/LICENSE)
 
 ## How to run
@@ -19,8 +19,8 @@
 * Clone repository and install dependencies:
 
 ```
-$ git clone git@github.com:RocketChat/Rocket.Chat.ReactNative.git
-$ cd Rocket.Chat.ReactNative
+$ git clone git@github.com:oguhpereira/moneystore.git
+$ cd moneystore
 $ yarn
 ```
 
