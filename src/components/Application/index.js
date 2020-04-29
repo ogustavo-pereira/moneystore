@@ -3,12 +3,7 @@
  * Aplication
  */
 import React, { useEffect, useState } from 'react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Redirect,
-} from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { connect, useSelector } from 'react-redux';
 
@@ -20,8 +15,6 @@ import * as ApplicationAPI from './AplicationAPI';
 import { setBitcoin, setBrita } from '../../store/actions/price';
 import { login } from '../../store/actions/auth';
 import CloseIcon from '../../images/close.svg';
-
-const hist = createBrowserHistory();
 
 /**
  * @function Container
@@ -112,6 +105,7 @@ function PrivateRoute(props) {
  * @returns {JSX}
  */
 function Application({ auth, setWallet, setBitcoin, setBrita }) {
+	const hist = createBrowserHistory();
 	useEffect(() => {
 		if (auth.isAuthenticated) {
 			getWallet();
