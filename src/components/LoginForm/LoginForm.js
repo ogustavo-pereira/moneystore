@@ -4,11 +4,11 @@
  */
 
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import lang from '../../languages';
 import { errorSpan } from '../../utils';
-import * as LoginAPI from './LoginFormAPI';
+import * as LoginFormAPI from './LoginFormAPI';
 
 /**
  * @function LoginForm
@@ -17,13 +17,7 @@ import * as LoginAPI from './LoginFormAPI';
  * render
  */
 export default function LoginForm({ login }) {
-	const userAuth = localStorage.getItem('auth');
-	const dataUser = JSON.parse(localStorage.getItem('data') || '{}');
-
-	if (userAuth in dataUser) {
-		login(userAuth);
-	}
-
+	let history = useHistory();
 	const emailGroup = useRef(null);
 	const passwordGroup = useRef(null);
 
@@ -38,13 +32,14 @@ export default function LoginForm({ login }) {
 		try {
 			if (errorValidationForm(target)) return;
 
-			const token = LoginAPI.login({
+			const token = LoginFormAPI.login({
 				email: target.email.value,
 				password: target.password.value,
 			});
 
 			if (token) {
 				login(token);
+				history.push('/dashboard');
 			}
 		} catch (e) {
 			if (e === lang.user_not_found) {
@@ -127,7 +122,6 @@ export default function LoginForm({ login }) {
 					{lang.register}
 				</Link>
 				<button className="btn btn-success mt-10 clear">{lang.next}</button>
-
 			</form>
 		</div>
 	);

@@ -44,7 +44,11 @@ export default function Extract() {
 				price: (
 					<span className={`price-${extractRow.type.toLowerCase()}`}>
 						{`${
-							extractRow.type.toLowerCase() === 'buy' ? '-' : '+'
+							extractRow.type.toLowerCase() === 'buy'
+								? '-'
+								: extractRow.type.toLowerCase() === 'sell'
+								? '+'
+								: ''
 						}  R$ ${formatMoney(extractRow.price)}`}
 					</span>
 				),
@@ -82,7 +86,8 @@ export default function Extract() {
 			<div className="header">
 				<h1 className="title">{lang.complete_extract}</h1>
 				<span className="btn btn-print" onClick={() => PrintExtract()}>
-					<img src={PrintIcon} title={lang.print} alt={lang.print} />{lang.print}
+					<img src={PrintIcon} title={lang.print} alt={lang.print} />
+					{lang.print}
 				</span>
 			</div>
 

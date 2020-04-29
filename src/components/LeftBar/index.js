@@ -4,7 +4,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Markdown from 'react-markdown';
 
 import './leftbar.css';
@@ -40,12 +40,14 @@ function HelpModal() {
 }
 
 function LeftBar({ logout }) {
+	let history = useHistory();
 	const [viewModalHelp, setViewModalHelp] = useState(false);
 	const dashboadIcon = window.location.pathname.match('dashboard');
 	const shoppingIcon = window.location.pathname.match('trade');
 	function handleLogout() {
 		localStorage.setItem('auth', '');
 		logout();
+		history.push('/login');
 	}
 	return (
 		<div className="leftbar">

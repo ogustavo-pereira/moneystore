@@ -78,7 +78,7 @@ const Coins = () => {
 		<div className="my-coins">
 			<DinamicArea title={languages.your_coins}>
 				{wallet.coins.map(({ quantity, name }, index) => {
-					if (price[name.toLowerCase()] && quantity) {
+					if (price[name.toLowerCase()]) {
 						return (
 							<Coin
 								key={index}
@@ -120,29 +120,32 @@ const OperationItem = ({ coin, value, date }) =>
 const LatestOperation = () => {
 	const { operations } = useSelector((state) => state.wallet);
 	const Op = [].concat(operations).reverse();
-	return (
-		<div className="latest-operations">
-			<DinamicArea title={languages.latest_operations}>
-				<div className="operations">
-					<ul className="operations-list">
-						{Op.slice(0, 5).map(
-							({ value, quantity, price, name, date }, index) => (
-								<OperationItem
-									key={index}
-									coin={name}
-									value={quantity * price}
-									date={date}
-								/>
-							)
-						)}
-					</ul>
-					<div className="text-center mt-20">
-						<Link to="/extract">{languages.see_complete_extract}</Link>
+	if (Op.length > 0) {
+		return (
+			<div className="latest-operations">
+				<DinamicArea title={languages.latest_operations}>
+					<div className="operations">
+						<ul className="operations-list">
+							{Op.slice(0, 5).map(
+								({ value, quantity, price, name, date }, index) => (
+									<OperationItem
+										key={index}
+										coin={name}
+										value={quantity * price}
+										date={date}
+									/>
+								)
+							)}
+						</ul>
+						<div className="text-center mt-20">
+							<Link to="/extract">{languages.see_complete_extract}</Link>
+						</div>
 					</div>
-				</div>
-			</DinamicArea>
-		</div>
-	);
+				</DinamicArea>
+			</div>
+		);
+	}
+	return null;
 };
 
 /**

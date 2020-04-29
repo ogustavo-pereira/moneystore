@@ -1,3 +1,4 @@
+import lang from '../../languages';
 /**
  * @function save
  * @param {Object} data json form

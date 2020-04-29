@@ -62,6 +62,8 @@ const ptBR = {
 	dashboard: 'Dashboard',
 	last_updated: 'Última Atualização',
 	logout: 'Logout',
+	you_not_have_information:
+		'Você não tem informação suficiente para exibir estes dados',
 };
 
 const enUS = {
@@ -129,6 +131,8 @@ const enUS = {
 	dashboard: 'Dashboard',
 	last_updated: 'Last Updated',
 	logout: 'Logout',
+	you_not_have_information:
+		'You do not have enough information to display this data',
 };
 
 const lang = navigator.language === 'pt-BR' ? ptBR : enUS;

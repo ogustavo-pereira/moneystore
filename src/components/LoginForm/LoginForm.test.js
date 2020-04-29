@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import LoginForm from './LoginForm';
 import { FORM_VALIDATION } from '../../constants';
 
-
 const setUp = () => shallow(<LoginForm />);
 
 describe('LoginForm Component', () => {

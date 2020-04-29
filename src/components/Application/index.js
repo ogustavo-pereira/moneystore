@@ -10,7 +10,7 @@ import {
 	Redirect,
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import LeftBar from '../LeftBar';
 import RightBar from '../RightBar';
@@ -18,6 +18,7 @@ import { PrivateRoutes, PublicRoutes } from '../../routes';
 import { setWallet as setWalletAction } from '../../store/actions/wallet';
 import * as ApplicationAPI from './AplicationAPI';
 import { setBitcoin, setBrita } from '../../store/actions/price';
+import { login } from '../../store/actions/auth';
 
 const hist = createBrowserHistory();
 
@@ -51,22 +52,18 @@ function Container({ children, isPublic }) {
  * @returns {JSX}
  */
 function PrivateRoute(props) {
-	const { auth } = props;
+	const auth = useSelector((state) => state.auth);
+
 	return (
 		<Route
 			{...props.rest}
 			render={({ location }) =>
-				auth.isAuthenticated ? (
+				auth.isAuthenticated || localStorage.getItem('auth') ? (
 					<Container>
 						<props.component />
 					</Container>
 				) : (
-					<Redirect
-						to={{
-							pathname: '/login',
-							state: { from: location },
-						}}
-					/>
+					<Redirect to={'/login'} />
 				)
 			}
 		/>
@@ -83,6 +80,12 @@ function PrivateRoute(props) {
  */
 function Application({ auth, setWallet, setBitcoin, setBrita }) {
 	useEffect(() => {
+		if (auth.isAuthenticated) {
+			getWallet();
+			setInterval(watchBitcoin(), 30000);
+			setInterval(watchBrita(), 3600000);
+			return;
+		}
 		async function watchBitcoin() {
 			setBitcoin(parseFloat(await ApplicationAPI.getBitCoinPrice()));
 		}
@@ -92,35 +95,27 @@ function Application({ auth, setWallet, setBitcoin, setBrita }) {
 		async function getWallet() {
 			setWallet(ApplicationAPI.getWallet());
 		}
-		if (auth.isAuthenticated) {
-			getWallet();
-			setInterval(watchBitcoin(), 30000);
-			setInterval(watchBrita(), 3600000);
-		}
 	});
 
 	return (
 		<Router history={hist}>
 			<Switch>
-				{PublicRoutes.map((props, index) => (
-					<Route key={index} {...props}>
-						{auth.isAuthenticated ? (
-							<Redirect to="/dashboard" />
-						) : (
+				{!auth.isAuthenticated &&
+					PublicRoutes.map((props, index) => (
+						<Route key={index} {...props}>
 							<Container isPublic>
 								<props.component />
 							</Container>
-						)}
-					</Route>
-				))}
+						</Route>
+					))}
 				{PrivateRoutes.map((props, index) => (
-					<PrivateRoute key={index} {...props} auth={auth} />
+					<PrivateRoute key={index} {...props} />
 				))}
 				<Route>
 					{auth.isAuthenticated ? (
-						<Redirect to="/dashboard" />
+						<Redirect from="/" to="/dashboard" />
 					) : (
-						<Redirect to="/login" />
+						<Redirect from="/" to="/login" />
 					)}
 				</Route>
 			</Switch>
@@ -137,6 +132,7 @@ const mapDispatchToProps = (dispatch) => {
 		setWallet: (state) => dispatch(setWalletAction(state)),
 		setBitcoin: (state) => dispatch(setBitcoin(state)),
 		setBrita: (state) => dispatch(setBrita(state)),
+		login: (state) => dispatch(login(state)),
 	};
 };
 

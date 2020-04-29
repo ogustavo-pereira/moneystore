@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as AuthActions from '../../store/actions/auth';
-import LoginForm from './LoginFormAPI';
+import LoginForm from './LoginForm';
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,

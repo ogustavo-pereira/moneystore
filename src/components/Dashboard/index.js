@@ -54,25 +54,28 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 function CustomLineChart({ data }) {
-	return (
-		<ResponsiveContainer width="100%" height={300}>
-			<LineChart
-				data={data}
-				margin={{
-					top: 0,
-					right: 30,
-					left: 20,
-					bottom: 5,
-				}}
-			>
-				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis dataKey="quantity" />
-				<YAxis tick={<CustomizedAxisTick />} />
-				<Tooltip content={<CustomTooltip />} />
-				<Line type="monotone" dataKey="price" stroke="var(--green)" />
-			</LineChart>
-		</ResponsiveContainer>
-	);
+	if (data.length > 0) {
+		return (
+			<ResponsiveContainer width="100%" height={300}>
+				<LineChart
+					data={data}
+					margin={{
+						top: 0,
+						right: 30,
+						left: 20,
+						bottom: 5,
+					}}
+				>
+					<CartesianGrid strokeDasharray="3 3" />
+					<XAxis dataKey="quantity" />
+					<YAxis tick={<CustomizedAxisTick />} />
+					<Tooltip content={<CustomTooltip />} />
+					<Line type="monotone" dataKey="price" stroke="var(--green)" />
+				</LineChart>
+			</ResponsiveContainer>
+		);
+	}
+	return <span>{lang.you_not_have_information}</span>;
 }
 
 export default function Dashboard(props) {
@@ -100,12 +103,15 @@ export default function Dashboard(props) {
 	}
 	function dataPieChart(type) {
 		if (type === 'coins') {
-			return wallet.coins.map((coin) => {
-				return {
-					name: coin.name,
-					value: roundNumber(coin.quantity * price[coin.name.toLowerCase()]),
-				};
-			});
+			return wallet.coins.reduce((prev, cur) => {
+				if (cur.quantity) {
+					return prev.concat({
+						name: cur.name,
+						value: roundNumber(cur.quantity * price[cur.name.toLowerCase()]),
+					});
+				}
+				return prev;
+			}, []);
 		} else {
 			return [
 				{
@@ -228,35 +234,37 @@ const renderActiveShape = (props) => {
 
 function PieChartCustom({ data }) {
 	const [activeIndex, setIndex] = useState(0);
+	if (data.length > 0) {
+		function onPieEnter(data, index) {
+			setIndex(index);
+		}
 
-	function onPieEnter(data, index) {
-		setIndex(index);
+		return (
+			<ResponsiveContainer width="100%" height={400}>
+				<PieChart
+					margin={{
+						top: 0,
+						right: 30,
+						left: 50,
+						bottom: 5,
+					}}
+				>
+					<Pie
+						activeIndex={activeIndex}
+						activeShape={renderActiveShape}
+						data={data}
+						cx={200}
+						cy={200}
+						innerRadius={60}
+						outerRadius={80}
+						fill="var(--green)"
+						dataKey="value"
+						onMouseEnter={onPieEnter}
+					/>
+					<Legend verticalAlign="top" height={36} />
+				</PieChart>
+			</ResponsiveContainer>
+		);
 	}
-
-	return (
-		<ResponsiveContainer width="100%" height={400}>
-			<PieChart
-				margin={{
-					top: 0,
-					right: 30,
-					left: 50,
-					bottom: 5,
-				}}
-			>
-				<Pie
-					activeIndex={activeIndex}
-					activeShape={renderActiveShape}
-					data={data}
-					cx={200}
-					cy={200}
-					innerRadius={60}
-					outerRadius={80}
-					fill="var(--green)"
-					dataKey="value"
-					onMouseEnter={onPieEnter}
-				/>
-				<Legend verticalAlign="top" height={36} />
-			</PieChart>
-		</ResponsiveContainer>
-	);
+	return <span>{lang.you_not_have_information}</span>;
 }

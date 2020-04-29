@@ -44,4 +44,4 @@ storiesOf('Components|SimpleTable', module)
 				keys={table.keys}
 			/>
 		</div>
-	));;
+	));
