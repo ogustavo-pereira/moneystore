@@ -318,3 +318,14 @@ input[type='number'] {
 		width: 100%;
 	}
 }
+
+@media(min-width: 1025px) {
+	.wrap-card {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	.wrap-card .card {
+		width: calc(50% - 7.5px)
+	}
+}
