@@ -30,17 +30,22 @@ $ yarn
 yarn start
 ```
 
-## How to buil
+## How run test
+
+```
+yarn test
+```
+
+## How to build
 
 ```
 yarn build
 ```
 
-
-## How to buil
+## Component Storybook
 
 ```
-yarn build
+yarn storybook
 ```
 
 ## License
