@@ -13,6 +13,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f34192e6f38642fe880718a475346f7b)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oguhpereira/moneystore&amp;utm_campaign=Badge_Grade)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/oguhpereira/moneystore/blob/master/LICENSE)
 
+![Screenshot](https://github.com/oguhpereira/moneystore/blob/master/.github/screenshot.png?raw=true)
+
 ## How to run
 
 *  Clone repository and install dependencies:
