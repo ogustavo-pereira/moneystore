@@ -16,6 +16,7 @@ import { setBitcoin, setBrita } from '../../store/actions/price';
 import { login } from '../../store/actions/auth';
 import CloseIcon from '../../images/close.svg';
 
+const hist = createBrowserHistory();
 /**
  * @function Container
  * @param {JSX} children
@@ -105,7 +106,6 @@ function PrivateRoute(props) {
  * @returns {JSX}
  */
 function Application({ auth, setWallet, setBitcoin, setBrita }) {
-	const hist = createBrowserHistory();
 	useEffect(() => {
 		if (auth.isAuthenticated) {
 			getWallet();
@@ -129,14 +129,13 @@ function Application({ auth, setWallet, setBitcoin, setBrita }) {
 	return (
 		<Router history={hist}>
 			<Switch>
-				{!auth.isAuthenticated &&
-					PublicRoutes.map((props, index) => (
-						<Route key={index} {...props}>
-							<Container isPublic>
-								<props.component />
-							</Container>
-						</Route>
-					))}
+				{PublicRoutes.map((props, index) => (
+					<Route key={index} {...props}>
+						<Container isPublic>
+							<props.component />
+						</Container>
+					</Route>
+				))}
 				{PrivateRoutes.map((props, index) => (
 					<PrivateRoute key={index} {...props} />
 				))}
