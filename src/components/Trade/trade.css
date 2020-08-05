@@ -1,14 +1,16 @@
 .trade {
 	min-width: 450px;
 }
+
 .trade .buy-coin {
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .trade .buy-coin .btn-buy {
-	background-color: var(--green);
 	margin-left: auto;
+
+	background-color: var(--green);
 }
 
 .trade .buy-coin .description-atention {
@@ -16,8 +18,9 @@
 }
 
 .trade .action-button {
-	color: var(--green);
 	cursor: pointer;
+
+	color: var(--green);
 }
 
 .trade .action-button:hover {
@@ -25,11 +28,11 @@
 }
 
 .trade .action-button div {
-	align-items: center;
 	display: inline-flex;
+	align-items: center;
 }
 
 .trade .action-button img {
-	margin-right: 4px;
 	margin-top: 1px;
+	margin-right: 4px;
 }

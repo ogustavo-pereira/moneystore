@@ -2,11 +2,13 @@
 	min-width: 620px;
 	padding-right: 25px;
 }
+
 .extract [class^='type-'],
 .extract [class^='status-'],
 .extract .name {
-	font-weight: 500;
 	color: var(--blue-light);
+
+	font-weight: 500;
 }
 
 .extract .type-trade,
@@ -29,7 +31,7 @@
 }
 
 .extract .simple-table tr:nth-child(2n) {
-	background-color: #eeee;
+	background-color: #eeeeeeee;
 }
 
 .extract .status-pending,
@@ -38,26 +40,33 @@
 }
 
 .extract .header {
-	align-items: center;
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
 
 .extract .header .btn-print {
-	border-radius: 10px;
 	height: auto;
 	padding: 10px;
+
+	border-radius: 10px;
 }
 
 .extract .btn-print img {
-	margin-bottom: 2px;
-	margin-right: 10px;
 	width: 17px;
+	margin-right: 10px;
+	margin-bottom: 2px;
 }
-
 
 @media (max-width: 550px) {
 	.extract {
 		padding-right: 60px;
 	}
+}
+
+#printer {
+	width: 0;
+	height: 0;
+
+	opacity: 0;
 }

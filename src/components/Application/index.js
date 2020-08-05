@@ -15,6 +15,7 @@ import * as ApplicationAPI from './AplicationAPI';
 import { setBitcoin, setBrita } from '../../store/actions/price';
 import { login } from '../../store/actions/auth';
 import CloseIcon from '../../images/close.svg';
+import { transform } from 'babel-core';
 
 const hist = createBrowserHistory();
 /**
@@ -44,25 +45,20 @@ function Container({ children, isPublic }) {
 			</div>
 			<div className="main-content">{children}</div>
 			<div
-				style={{
-					width: collapseMenu && window.screen.width < 950 ? '' : '300px',
-					opacity: collapseMenu && window.screen.width < 950 ? '' : 1,
-				}}
-				className="right-content"
+				className={`right-content ${
+					collapseMenu && window.screen.width < 950 ? '' : 'collapse-menu'
+				}`}
 			>
 				<RightBar />
 			</div>
 			{window.screen.width < 950 && (
 				<span
-					style={{
-						right: collapseMenu ? '5px' : '285px',
-					}}
 					onClick={() => handleCollapse()}
-					className="collapse-btn"
+					className={`collapse-btn ${collapseMenu ? 'right-5' : 'right-285'}`}
 				>
 					<img
 						width="20px"
-						style={{ transform: collapseMenu ? 'rotate(180deg)' : '' }}
+						className={collapseMenu && 'rotate-180'}
 						src={CloseIcon}
 						alt="Collapse"
 						title="Collapse"

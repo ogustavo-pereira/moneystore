@@ -219,7 +219,7 @@ export default function Dashboard(props) {
 	)}`;
 
 	return (
-		<div style={{ minWidth: '550px' }}>
+		<div className="min-w-550">
 			<h1 className="title">{lang.dashboard}</h1>
 			<div className="wrap-card">
 				<Card title={lang.your_wallet} description={descriptionPie}>

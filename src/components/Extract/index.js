@@ -99,11 +99,7 @@ export default function Extract() {
 					keys={extractTable.keys}
 				/>
 			</div>
-			<iframe
-				title="printer"
-				id="printer"
-				style={{ width: '0px', height: '0px', opacity: 0 }}
-			/>
+			<iframe title="printer" id="printer" />
 		</div>
 	);
 }

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Card from '../components/Card';
 const footerElement = () => {
 	return (
-		<p style={{ borderTop: '1px solid' }}>
+		<p className="border-top">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus felis nec
 			tellus dapibus, vestibulum lectus quis, gravida sapien.
 		</p>
@@ -12,7 +12,7 @@ const footerElement = () => {
 };
 storiesOf('Components|Card', module)
 	.add('common', () => (
-		<div style={{ padding: 20 }}>
+		<div className="p-20">
 			<Card title="Card Component" description="Card Description">
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus felis
@@ -29,7 +29,7 @@ storiesOf('Components|Card', module)
 		</div>
 	))
 	.add('with footer', () => (
-		<div style={{ padding: 20 }}>
+		<div className="p-20">
 			<Card
 				title="Card Component"
 				description="Card Description"

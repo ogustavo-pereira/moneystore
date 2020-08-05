@@ -5,7 +5,7 @@ import Modal from '../components/Modal';
 
 storiesOf('Components|Modal', module)
 	.add('common', () => (
-		<div style={{ padding: 20 }}>
+		<div className="p-20">
 			<Modal
 				header={{
 					title: 'Modal',
@@ -23,7 +23,7 @@ storiesOf('Components|Modal', module)
 		</div>
 	))
 	.add('with description', () => (
-		<div style={{ padding: 20 }}>
+		<div className="p-20">
 			<Modal
 				header={{
 					title: 'Modal',
@@ -42,7 +42,7 @@ storiesOf('Components|Modal', module)
 		</div>
 	))
 	.add('with hasCloseArea', () => (
-		<div style={{ padding: 20 }}>
+		<div className="p-20">
 			<Modal
 				header={{
 					title: 'Modal',

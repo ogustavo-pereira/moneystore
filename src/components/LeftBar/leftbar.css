@@ -1,85 +1,101 @@
 .leftbar {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+
 	min-height: 100%;
+	justify-content: space-between;
 }
 
 .leftbar .logo {
 	margin-top: 55px;
+
 	text-align: center;
 }
 
 .leftbar .logo .icon-md {
 	box-sizing: border-box;
-	padding: 5px;
 	width: 60px;
+	padding: 5px;
 }
+
 .leftbar .logo .icon-md:hover {
-	transform: rotate(20deg);
 	transition: 0.2s;
+	transform: rotate(20deg);
 }
 
 .leftbar .navigation {
-	margin: 0px;
 	min-height: 250px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
+
 	list-style-type: none;
 }
+
 .leftbar .navigation-item {
-	border-color: var(--green);
 	display: inline-block;
-	font-weight: 600;
+
 	padding: 15px;
+
+	border-color: var(--green);
+
+	font-weight: 600;
 }
 
 .leftbar .navigation-item.active {
-	background-color: var(--green);
 	border-right: 9px solid var(--green);
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
-	-webkit-box-shadow: 0px 3px 30px -12px rgba(0, 0, 0, 0.37);
-	-moz-box-shadow: 0px 3px 30px -12px rgba(0, 0, 0, 0.37);
-	box-shadow: 0px 3px 30px -12px rgba(0, 0, 0, 0.37);
+	background-color: var(--green);
+	-webkit-box-shadow: 0 3px 30px -12px rgba(0, 0, 0, 0.37);
+	-moz-box-shadow: 0 3px 30px -12px rgba(0, 0, 0, 0.37);
+	box-shadow: 0 3px 30px -12px rgba(0, 0, 0, 0.37);
 }
 
 .leftbar .navigation-item:hover {
-	background-color: #f0f1f2;
 	transition: all 0.1s;
+
+	background-color: #f0f1f2;
 }
 
 .leftbar .navigation-item.active:hover {
-	background-color: var(--green);
-	border-right: 7px solid var(--green);
 	transition: border-right 0.1s;
+
+	border-right: 7px solid var(--green);
+	background-color: var(--green);
 }
 
 .leftbar .help {
-	cursor: pointer;
 	margin-bottom: 10px;
+
+	cursor: pointer;
 	text-align: center;
 }
 
 .leftbar .help:hover {
-	transform: translate(0px, -7px);
 	transition: transform 0.2s;
+	transform: translate(0, -7px);
 }
 
 .leftbar .logout {
-	cursor: pointer;
 	margin-bottom: 10px;
+
+	cursor: pointer;
 	text-align: center;
 }
+
 @media (max-width: 600px) {
 	.leftbar {
-		align-items: center;
-		bottom: 0;
-		flex-direction: row;
-		height: 70px;
-		justify-content: space-around;
 		top: unset;
+		bottom: 0;
+
+		flex-direction: row;
+
 		width: 100%;
+		height: 70px;
+		align-items: center;
+		justify-content: space-around;
 	}
+
 	.leftbar .logo {
 		margin-top: 10px;
 	}
@@ -88,18 +104,18 @@
 	.leftbar .logout {
 		display: block;
 		float: left;
+
 		margin: 10px;
 	}
 
 	.leftbar .navigation {
-		min-height: 0px;
+		min-height: 0;
 	}
 
 	.leftbar .navigation-item.active {
-		background-color: var(--green-dark);
 		border-top: 10px solid var(--green--dark);
-		border-right: 0px;
+		border-right: 0;
 		border-radius: 10px;
+		background-color: var(--green-dark);
 	}
-
 }
