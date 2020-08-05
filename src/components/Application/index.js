@@ -15,7 +15,6 @@ import * as ApplicationAPI from './AplicationAPI';
 import { setBitcoin, setBrita } from '../../store/actions/price';
 import { login } from '../../store/actions/auth';
 import CloseIcon from '../../images/close.svg';
-import { transform } from 'babel-core';
 
 const hist = createBrowserHistory();
 /**

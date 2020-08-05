@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './trade.css';
-import lang from '../../languages';
+import lang from '../../constants/languages';
 import SimpleTable from '../SimpleTable';
 import * as WalletActions from '../../store/actions/wallet';
 import * as PriceActions from '../../store/actions/price';
@@ -19,7 +19,7 @@ import {
 	disableOperators,
 	roundString,
 	roundNumber,
-} from '../../utils';
+} from '../../helpers/utils';
 import Modal from '../Modal';
 import * as TradeAPI from './TradeAPI';
 import {

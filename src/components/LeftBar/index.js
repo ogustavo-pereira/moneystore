@@ -15,7 +15,7 @@ import Stats from '../../images/stats.svg';
 import StatsActive from '../../images/stats-active.svg';
 import Shopping from '../../images/shopping.svg';
 import ShoppingActive from '../../images/shopping-active.svg';
-import lang from '../../languages';
+import lang from '../../constants/languages';
 import { logout } from '../../store/actions/auth';
 import Modal from '../Modal';
 import HelpInfo from './Help.md';

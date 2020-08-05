@@ -12848,6 +12848,13 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
+react-to-print@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.npm.taobao.org/react-to-print/download/react-to-print-2.9.0.tgz#98ab01df49208f35f2e2329a988b0cc11f72720d"
+  integrity sha1-mKsB30kgjzXy4jKamIsMwR9ycg0=
+  dependencies:
+    prop-types "^15.7.2"
+
 react-toastify@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-5.5.0.tgz#f55de44f6b5e3ce3b13b69e5bb4427f2c9404822"

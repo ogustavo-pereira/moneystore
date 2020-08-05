@@ -2,12 +2,17 @@
  * @author oguhpereira
  * Extract View
  */
-import React from 'react';
+import React, { useRef } from 'react';
+import ReactToPrint from 'react-to-print';
 import { useSelector } from 'react-redux';
 
 import SimpleTable from '../SimpleTable';
-import lang from '../../languages';
-import { formatMoney, roundNumber, formatDateFulllHour } from '../../utils';
+import lang from '../../constants/languages';
+import {
+	formatMoney,
+	roundNumber,
+	formatDateFulllHour,
+} from '../../helpers/utils';
 import PrintIcon from '../../images/printicon.svg';
 import './extract.css';
 
@@ -16,27 +21,10 @@ import './extract.css';
  * @returns {JSX}
  */
 export default function Extract() {
+	const tableExtract = useRef(null);
 	const wallet = useSelector((state) => state.wallet);
 	const data = [].concat(wallet.operations).reverse();
 
-	function PrintExtract() {
-		const content = document.getElementById('extract-table');
-		const pri = document.getElementById('printer').contentWindow;
-		pri.document.open();
-		pri.document.write(`
-		<style>
-			.simple-table {
-				text-align: center;
-				width: 100%;
-
-			}
-		</style>
-
-		${content.innerHTML}`);
-		pri.document.close();
-		pri.focus();
-		pri.print();
-	}
 	function dataExtract() {
 		return data.map((extractRow) => {
 			return {
@@ -80,18 +68,24 @@ export default function Extract() {
 		keys: ['date', 'price', 'type', 'name', 'quantity', 'status'],
 		data: dataExtract(),
 	};
-
+	console.log(tableExtract);
 	return (
 		<div className="extract">
 			<div className="header">
 				<h1 className="title">{lang.complete_extract}</h1>
-				<span className="btn btn-print" onClick={() => PrintExtract()}>
-					<img src={PrintIcon} title={lang.print} alt={lang.print} />
-					{lang.print}
-				</span>
+				<ReactToPrint
+					trigger={() => (
+						<span className="btn btn-print">
+							<img src={PrintIcon} title={lang.print} alt={lang.print} />
+							{lang.print}
+						</span>
+					)}
+					content={() => tableExtract.current}
+					pageStyle={{ padding: 20 }}
+				/>
 			</div>
 
-			<div id="extract-table">
+			<div ref={tableExtract} id="extract-table">
 				<SimpleTable
 					title={lang.extract}
 					head={extractTable.head}
@@ -99,7 +93,6 @@ export default function Extract() {
 					keys={extractTable.keys}
 				/>
 			</div>
-			<iframe title="printer" id="printer" />
 		</div>
 	);
 }

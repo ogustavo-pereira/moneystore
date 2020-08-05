@@ -17,8 +17,12 @@ import {
 	PieChart,
 } from 'recharts';
 
-import lang from '../../languages';
-import { formatMoney, roundNumber, formatDateFulllHour } from '../../utils';
+import lang from '../../constants/languages';
+import {
+	formatMoney,
+	roundNumber,
+	formatDateFulllHour,
+} from '../../helpers/utils';
 import Card from '../Card';
 
 function CustomizedAxisTick({ x, y, payload }) {

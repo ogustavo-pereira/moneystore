@@ -11,7 +11,7 @@ import {
 	INVALID_TOKEN,
 	INSUFFICIENT_QUANTITY,
 } from '../../constants';
-import { roundNumber } from '../../utils';
+import { roundNumber } from '../../helpers/utils';
 
 /**
  * @function validCoinData

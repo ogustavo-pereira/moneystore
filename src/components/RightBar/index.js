@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 
 import './rightbar.css';
-import { formatMoney, formatDate } from '../../utils';
-import languages from '../../languages';
+import { formatMoney, formatDate } from '../../helpers/utils';
+import languages from '../../constants/languages';
 import BitcoinIcon from '../../images/bitcoingreenbg.svg';
 import BritaIcon from '../../images/britagreenbg.svg';
 

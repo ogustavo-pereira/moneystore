@@ -6,8 +6,8 @@
 import React, { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import lang from '../../languages';
-import { errorSpan } from '../../utils';
+import lang from '../../constants/languages';
+import { errorSpan } from '../../helpers/utils';
 import * as LoginFormAPI from './LoginFormAPI';
 
 /**

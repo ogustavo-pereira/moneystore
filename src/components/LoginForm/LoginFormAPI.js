@@ -1,4 +1,4 @@
-import lang from '../../languages';
+import lang from '../../constants/languages';
 /**
  * @function login
  * @param {Object} data json form
