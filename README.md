@@ -5,49 +5,73 @@
     Money Store
 </h1>
 <h4 align="center">
-    Simple application example using React
+    Example of a small financial application using react
 </h4>
 
-[![Project Dependencies](https://david-dm.org/oguhpereira/moneystore/dev-status.svg)](https://david-dm.org/oguhpereira/moneystore)
-[![devDependencies Status](https://david-dm.org/oguhpereira/moneystore/dev-status.svg)](https://david-dm.org/oguhpereira/moneystore?type=dev)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f34192e6f38642fe880718a475346f7b)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oguhpereira/moneystore&amp;utm_campaign=Badge_Grade)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/oguhpereira/moneystore/blob/master/LICENSE)
 
 ![Screenshot](https://github.com/oguhpereira/moneystore/blob/master/.github/screenshot.png?raw=true)
 
 ## How to run
 
-*  Clone repository and install dependencies:
+To run the application you will need to perform the following commands:
+
+*  Clone repository and install dependencies
 
 ```shell
 $ git clone git@github.com:oguhpereira/moneystore.git
+```
+
+* Go to repository
+```shell
 $ cd moneystore
-$ yarn
+```
+
+*  Install dependencies
+
+```shell
+$ yarn install
 ```
 
 *  Run application
 
 ```shell
-yarn start
+$ yarn start
 ```
+
+## How to use
+
+To use the application it is first necessary to create a user. On the login screen, you will be able to register your username and then you will be able to log in and use the application.
+
+
+
 
 ## How run test
 
+This project uses enzyme and jest to test these components. To run the tests you must run the following command in the terminal
+
 ```shell
-yarn test
+$ yarn test
 ```
 
 ## How to build
 
 ```shell
-yarn build
+$ yarn build
 ```
 
-## Component Storybook
+## Storybook
+
+To view the component documentation you can open the storybook with the following command
 
 ```shell
-yarn storybook
+$ yarn storybook
 ```
+
+### Technologies
+- Javascript
+- React
+- StoryBook
 
 ## License
 
