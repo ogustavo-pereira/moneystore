@@ -5,7 +5,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import Markdown from 'react-markdown';
 
 import './leftbar.css';
 import Logo from '../../images/logo.svg';
@@ -18,26 +17,6 @@ import ShoppingActive from '../../images/shopping-active.svg';
 import lang from '../../constants/languages';
 import { logout } from '../../store/actions/auth';
 import Modal from '../Modal';
-import HelpInfo from './Help.md';
-
-function HelpModal() {
-	const [sourceMarkdown, setSourceMarkdown] = useState(null);
-	useEffect(() => {
-		async function getRaw() {
-			if (!sourceMarkdown) {
-				const response = await fetch(HelpInfo);
-				const text = await response.text();
-				setSourceMarkdown(text);
-			}
-		}
-		getRaw();
-	});
-	return (
-		<div>
-			<Markdown source={sourceMarkdown} />
-		</div>
-	);
-}
 
 function LeftBar({ logout }) {
 	let history = useHistory();
@@ -112,7 +91,17 @@ function LeftBar({ logout }) {
 					}}
 					hasCloseArea
 				>
-					<HelpModal />
+							<div>
+			The MoneyStore is a simple web app for managing cryptocurrency virtual wallets. The code repository you can check on the [github](https://github.com/oguhpereira/moneystore).
+
+## For Run the Project
+
+All instructions about run this project can be found at [README](https://github.com/oguhpereira/moneystore/blob/master/README.md)
+
+## Contribuitors
+
+*  [Gustavo Pereira](https://oguhpereira.com.br/)
+		</div>
 				</Modal>
 			</div>
 		</div>

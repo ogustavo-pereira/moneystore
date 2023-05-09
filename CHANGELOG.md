@@ -1,1 +1,0 @@
-# @oguhpereira/moneystore Change Log
